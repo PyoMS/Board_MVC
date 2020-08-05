@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/spring/root-context.xml</config>
 		<config>src/main/resources/servlet-context.xml</config>
+		<config>src/main/resources/spring/dataSource-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
