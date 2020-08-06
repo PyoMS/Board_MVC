@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/layout/header.jsp"%>
 
 <!DOCTYPE html>
-
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>board</title>
 	
-	<!-- jQuery -->
+	<!-- 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<!-- Bootstrap CSS -->
+	Bootstrap CSS
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	
@@ -22,6 +20,7 @@
 			padding-bottom: 30px;
 		}
 	</style>
+	 -->
 	<script>
 		$(document).on('click', '#btnWriteForm', function(e){
 			e.preventDefault(); //html 에서 a 태그나 submit 태그는 고유의 동작이 있다. 페이지를 이동시킨다거나 form 안에 있는 input 등을 전송한다던가 그러한 동작이 있는데 e.preventDefault 는 그 동작을 중단시킨다.
