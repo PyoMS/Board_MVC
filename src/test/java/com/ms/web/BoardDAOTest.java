@@ -28,7 +28,7 @@ public class BoardDAOTest {
 	@Inject
 	public BoardDAO boardDAO; //의존성 주입은 쉽게 생각해서, 기존에 미리 만들어놓은 Implement에 대한 값을 다시 선언해주지 않아도 알아서 들어가게 해주는 것.
 
-	@Test @Ignore
+	@Test
 	public void testGetBoardList() throws Exception {
 		List<BoardVO> boardList = boardDAO.getBoardList();
 		logger.info("\n Board List \n ");
@@ -77,7 +77,7 @@ public class BoardDAOTest {
 
 	
 
-	@Test @Ignore
+	@Test
 
 	public void testInsertBoard() throws Exception {
 
