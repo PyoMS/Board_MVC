@@ -27,7 +27,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardForm")
-	public String boardForm() {
+	public String boardForm(@ModelAttribute("boardVO") BoardVO boardVO, Model model) {
 		return "board/boardForm";
 	}
 	
@@ -40,17 +40,36 @@ public class BoardController {
 	*/
 	@RequestMapping(value = "/saveBoard", method = RequestMethod.POST)
 	public String saveBoard(@ModelAttribute("BoardVO") BoardVO boardVO, //화면에서 넘겨주는 값을 BoardVO 와 매칭시켜 데이터를 받아 온다.
-			RedirectAttributes rttr //RedirectAttributes 를 사용하는  이유는 브라우저의 '뒤로가기' 버튼에 대한 대응책 입니다.
-			) throws Exception {
-		boardService.insertBoard(boardVO);
+			@RequestParam("mode") String mode,
+			RedirectAttributes rttr) throws Exception { //RedirectAttributes 를 사용하는  이유는 브라우저의 '뒤로가기' 버튼에 대한 대응책 입니다.
+			
+		if(mode.equals("mode")){
+			boardService.updateBoard(boardVO);
+		}else{
+			boardService.insertBoard(boardVO);
+		}
 		return "redirect:/board/getBoardList";
 	}
 	
+	//상세조회
 	@RequestMapping(value = "/getBoardContent", method = RequestMethod.GET)
 	public String getBoardContent(Model model, @RequestParam("bid") int bid) throws Exception{
 		model.addAttribute("boardContent", boardService.getBoardContent(bid));
 		return "board/boardContent";
 	}
-
+	
+	@RequestMapping(value="/editForm", method = RequestMethod.GET)
+	public String editForm(Model model, @RequestParam("bid") int bid, @RequestParam("mode") String mode) throws Exception{
+		model.addAttribute("boardContent", boardService.getBoardContent(bid)); // 1. db상에 존재하는 기존 data 조회
+		model.addAttribute("mode", mode); // mode 판단, edit
+		model.addAttribute("boardVO", new BoardVO()); // data를 새로 담을 new BoardVO .
+		return "board/boardForm";
+	}
+	
+	@RequestMapping(value="/deleteBoard", method=RequestMethod.GET)
+	public String deleteBoard(@RequestParam("bid") int bid, RedirectAttributes rttr) throws Exception{ // Q) param으로 RedirectAttributes 쓰는 이유? 
+		boardService.deleteBoard(bid);
+		return "redirect:/board/getBoardList";
+	}
 
 }
