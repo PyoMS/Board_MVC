@@ -26,6 +26,13 @@
 			e.preventDefault(); //html 에서 a 태그나 submit 태그는 고유의 동작이 있다. 페이지를 이동시킨다거나 form 안에 있는 input 등을 전송한다던가 그러한 동작이 있는데 e.preventDefault 는 그 동작을 중단시킨다.
 			location.href = "${pageContext.request.contextPath}/board/boardForm"; // 컨텍스트가 바뀌거나 해도 소스 수정없이 처리하기 위해 pageContext.request.contextPath 사용
 		});
+
+		//url로 event 발생.
+		function fn_contentView(bid){
+			var url = "${pageContext.request.contextPath}/board/getBoardContent";
+			url = url + "?bid=" + bid;
+			location.href = url;
+		}
 	</script>
 </head>
 
@@ -61,7 +68,15 @@
 								<c:forEach var="list" items="${boardList}">
 									<tr>
 										<td><c:out value="${list.bid}"/></td>
-										<td><c:out value="${list.title}"/></td>
+										
+										<td>
+										<!-- href는 동작하지 않게 설정-> href는 주소값으로 이동.. onClick으로 script function을 사용할 수 있도록 설정. 매개변수를 받아야 하므로. -->
+											<a href="#" onClick="fn_contentView(<c:out value="${list.bid}"/>)">
+												<c:out value="${list.title}"/>
+											</a>
+											
+										</td>
+										
 										<td><c:out value="${list.reg_id}"/></td>
 										<td><c:out value="${list.view_cnt}"/></td>
 										<td><c:out value="${list.reg_dt}"/></td>

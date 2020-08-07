@@ -22,7 +22,17 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.ms.web.board.model.BoardVO">
-		INSERT INTO TBL_BOARD (CATE_CD,TITLE,CONTENT,TAG,VIEW_CNT,REG_ID,REG_DT,EDIT_DT)
+		INSERT INTO TBL_BOARD (TITLE,CONTENT,TAG,VIEW_CNT,REG_ID,REG_DT,EDIT_DT)
+			VALUES(
+				#{title},
+				#{content},
+				#{tag},
+				0,
+				#{reg_id},
+				now(),
+				now()
+			)
+		<!-- INSERT INTO TBL_BOARD (CATE_CD,TITLE,CONTENT,TAG,VIEW_CNT,REG_ID,REG_DT,EDIT_DT)
 		VALUES(
 			#{cate_cd},
 			#{title},
@@ -32,7 +42,7 @@
 			#{reg_id},
 			now(),
 			now()
-		)
+		) -->
 	</insert>
 	
 	<update id="updateBoard" parameterType="com.ms.web.board.model.BoardVO">
