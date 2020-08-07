@@ -26,7 +26,7 @@
 						<span class="board_author">작성자 : </span>
 						<span class="board_author"><c:out value="${boardContent.reg_id}"/></span>
 						<span class="board_date"><c:out value="${boardContent.reg_dt}"/></span>
-					</div>
+					</div> 
 					<div class="board_content">${boardContent.content}</div>
 					<div class="board_tag">TAG : <c:out value="${boardContent.tag}"/></div>
 				</div>
