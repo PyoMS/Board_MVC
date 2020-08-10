@@ -1,9 +1,15 @@
 package com.ms.web.board.controller;
 
+import java.sql.SQLException;
+
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +22,8 @@ import com.ms.web.board.service.BoardService;
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
+	
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Inject
 	private BoardService boardService;
@@ -71,5 +79,13 @@ public class BoardController {
 		boardService.deleteBoard(bid);
 		return "redirect:/board/getBoardList";
 	}
+	
 
+//	@ResponseBody
+	@ExceptionHandler({SQLException.class,DataAccessException.class})
+	public String exceptionHandler(Model model, Exception e){
+		logger.info("exception : " + e.getMessage());
+		model.addAttribute("exception", e);
+		return "error/exception";
+	}
 }
