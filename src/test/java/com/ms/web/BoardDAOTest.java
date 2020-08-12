@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ms.web.board.dao.BoardDAO;
 import com.ms.web.board.model.BoardVO;
+import com.ms.web.common.Pagination;
 
 
 
@@ -29,8 +30,8 @@ public class BoardDAOTest {
 	public BoardDAO boardDAO; //의존성 주입은 쉽게 생각해서, 기존에 미리 만들어놓은 Implement에 대한 값을 다시 선언해주지 않아도 알아서 들어가게 해주는 것.
 
 	@Test
-	public void testGetBoardList() throws Exception {
-		List<BoardVO> boardList = boardDAO.getBoardList();
+	public void testGetBoardList(Pagination pagination) throws Exception {
+		List<BoardVO> boardList = boardDAO.getBoardList(pagination);
 		logger.info("\n Board List \n ");
 		if(boardList.size() > 0) {
 			for(BoardVO list : boardList) {
@@ -85,29 +86,26 @@ public class BoardDAOTest {
 
 		boardVO.setCate_cd("1");
 
-		boardVO.setTitle("첫번째 게시물 입니다.");
-
-		boardVO.setContent("첫번째 게시물입니다.");
+//		boardVO.setTitle("첫번째 게시물 입니다.");
+//		boardVO.setContent("첫번째 게시물입니다.");
 
 		boardVO.setTag("1");
 
 		boardVO.setReg_id("1");
 
-		
-
-		int result = boardDAO.insertBoard(boardVO);
-
-		logger.info("\n Insert Board Result " +result);
-
-		if(result == 1) {
-
-			logger.info("\n 게시물 등록 성공 ");
-
-		} else {
-
-			logger.info("\n 게시물 등록 실패");
-
+		for (int i = 0; i < 1234; i++) {
+			boardVO.setTitle(i+"번째 게시물 입니다.");
+			boardVO.setContent(i+"번째 게시물입니다.");
+			int result = boardDAO.insertBoard(boardVO);
+			logger.info("\n Insert Board Result " +result);
+			if(result == 1) {
+				logger.info("\n 게시물 등록 성공 ");
+			} else {
+				logger.info("\n 게시물 등록 실패");
+			}
 		}
+
+		
 
 	}
 
