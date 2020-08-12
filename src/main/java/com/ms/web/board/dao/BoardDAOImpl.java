@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import com.ms.web.board.model.BoardVO;
 import com.ms.web.common.Pagination;
+import com.ms.web.common.Search;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -14,8 +15,8 @@ public class BoardDAOImpl implements BoardDAO{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<BoardVO> getBoardList(Pagination pagination) throws Exception {
-		return sqlSession.selectList("com.ms.web.board.boardMapper.getBoardList", pagination);
+	public List<BoardVO> getBoardList(Search search) throws Exception {
+		return sqlSession.selectList("com.ms.web.board.boardMapper.getBoardList", search);
 	}
 
 	@Override
@@ -45,8 +46,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public int getBoardListCnt() throws Exception {
-		return sqlSession.selectOne("com.ms.web.board.boardMapper.getBoardListCnt");
+	public int getBoardListCnt(Search search) throws Exception {
+		return sqlSession.selectOne("com.ms.web.board.boardMapper.getBoardListCnt", search);
 	}
 
 }

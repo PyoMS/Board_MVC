@@ -21,6 +21,7 @@
 		}
 	</style>
 	 -->
+	 <c:url var="getBoardListURL" value="/board/getBoardList"></c:url>
 	<script>
 		$(document).on('click', '#btnWriteForm', function(e){
 			e.preventDefault(); //html 에서 a 태그나 submit 태그는 고유의 동작이 있다. 페이지를 이동시킨다거나 form 안에 있는 input 등을 전송한다던가 그러한 동작이 있는데 e.preventDefault 는 그 동작을 중단시킨다.
@@ -61,6 +62,16 @@
 
 				location.href = url;
 			}
+			
+			//검색 버튼 이벤트
+			$(document).on('click', '#btnSearch', function(e){
+				e.preventDefault();
+				var url = "${getBoardListURL}";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+				location.href = url;
+				console.log(url);
+			});	
 
 	</script>
 </head>
@@ -120,11 +131,14 @@
 				<button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">글쓰기</button>
 			</div>
 			
+			</br>
 			<!-- pagination{s} -->
 			<div id="paginationBox">
 				<ul class="pagination">
 					<c:if test="${pagination.prev}">
-						<li class="page-item"><a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+						<li class="page-item">
+						<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+						</li>
 					</c:if>
 		
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
@@ -135,11 +149,30 @@
 		
 					<c:if test="${pagination.next}">
 						<li class="page-item"><a class="page-link" href="#" onClick="fn_next('${pagination.range}', 
-						'${pagination.range}', '${pagination.rangeSize}')" >Next</a></li>
+						'${pagination.range}', '${pagination.rangeSize}')" >Next</a>
+						</li>
 					</c:if>
 				</ul>
 			</div>
 			<!-- pagination{e} -->
+			
+			<!-- search{s} -->
+		<div class="form-group row justify-content-center">
+			<div class="w100" style="padding-right:10px">
+				<select class="form-control form-control-sm" name="searchType" id="searchType">
+					<option value="title">제목</option>
+					<option value="Content">본문</option>
+					<option value="reg_id">작성자</option>
+				</select>
+			</div>
+			<div class="w300" style="padding-right:10px">
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+			</div>
+			<div>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+			</div>
+		</div>
+		<!-- search{e} -->
 
 		</div>
 	</article>

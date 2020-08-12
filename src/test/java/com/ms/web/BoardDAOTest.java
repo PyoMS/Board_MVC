@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ms.web.board.dao.BoardDAO;
 import com.ms.web.board.model.BoardVO;
 import com.ms.web.common.Pagination;
+import com.ms.web.common.Search;
 
 
 
@@ -30,8 +31,8 @@ public class BoardDAOTest {
 	public BoardDAO boardDAO; //의존성 주입은 쉽게 생각해서, 기존에 미리 만들어놓은 Implement에 대한 값을 다시 선언해주지 않아도 알아서 들어가게 해주는 것.
 
 	@Test
-	public void testGetBoardList(Pagination pagination) throws Exception {
-		List<BoardVO> boardList = boardDAO.getBoardList(pagination);
+	public void testGetBoardList(Search search) throws Exception {
+		List<BoardVO> boardList = boardDAO.getBoardList(search);
 		logger.info("\n Board List \n ");
 		if(boardList.size() > 0) {
 			for(BoardVO list : boardList) {
