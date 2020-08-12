@@ -71,7 +71,21 @@
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 				console.log(url);
-			});	
+			});
+			
+			//Enter key function
+			function enterkey() {
+		        if (window.event.keyCode == 13) {
+		        	console.log('press enterKey');
+		        	var url = "${getBoardListURL}";
+					url = url + "?searchType=" + $('#searchType').val();
+					url = url + "&keyword=" + $('#keyword').val();
+					location.href = url;
+					console.log(url);
+		        }
+			}
+
+
 
 	</script>
 </head>
@@ -166,7 +180,7 @@
 				</select>
 			</div>
 			<div class="w300" style="padding-right:10px">
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" onkeyup="enterkey();">
 			</div>
 			<div>
 				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
