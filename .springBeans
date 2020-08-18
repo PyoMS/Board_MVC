@@ -11,6 +11,8 @@
 		<config>src/main/resources/servlet-context.xml</config>
 		<config>src/main/resources/spring/dataSource-context.xml</config>
 		<config>src/main/resources/spring/tx-context.xml</config>
+		<config>src/main/resources/properties/database-properties.xml</config>
+		<config>src/main/resources/spring/common-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
