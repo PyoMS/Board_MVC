@@ -213,7 +213,7 @@
 				<div style="margin-top : 20px">
 					<button type="button" class="btn btn-sm btn-primary" id="btnUpdate">수정</button>
 					<button type="button" class="btn btn-sm btn-primary" id="btnDelete">삭제</button>
-					<button type="button" class="btn btn-sm btn-primary" id="btnList" onclick=btnList()>목록</button>
+					<button type="button" class="btn btn-sm btn-primary" id="btnList" onClick=btnList();>목록</button>
 				</div>
 				<!-- Reply Form {s} -->
 				<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
