@@ -36,7 +36,8 @@ import org.json.simple.JSONObject;
 public class BoardController {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	private JSONObject resultdata = null;
+	
 	@Inject
 	private BoardService boardService;
 	
@@ -142,17 +143,31 @@ public class BoardController {
 		return result;
 	}
 	
-	@RequestMapping( value = "toss_page_range.do", method=RequestMethod.POST)
+	@RequestMapping( value = "setPageRange.do", method=RequestMethod.POST)
 	public void setPageRange(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("@@@ setPageRange");
 		try {
-			JSONObject resultdata = new JSONObject();
+			resultdata = new JSONObject();
 			resultdata.put("bid", request.getParameter("bid"));
 			resultdata.put("page", request.getParameter("page"));
 			resultdata.put("range", request.getParameter("range"));
 			
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(resultdata);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@RequestMapping( value = "getPageRange.do", method=RequestMethod.POST)
+	public void getPageRange(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println("@@@ setPageRange");
+		try {
+			response.setContentType("application/x-json; charset=UTF-8");
+			response.getWriter().print(resultdata);
+			resultdata.clear();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

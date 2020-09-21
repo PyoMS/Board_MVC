@@ -152,10 +152,33 @@
 		</script>
 		<script type="text/javascript">
 			//목록 버튼
+			/*
 			$(document).on('click', '#btnList', function(e){
 				e.preventDefault();
 				location.href="${pageContext.request.contextPath}/board/getBoardList"; //TODO 2020.09.18 href로 떨어졌을 때, 이전 page정보 받을 수 있나
 			});
+			*/
+			
+			//목록 버튼 대체 function - ajax 2020.09.21 pms
+			function btnList(){
+				var url = "${pageContext.request.contextPath}/board/getBoardList";
+				$.ajax({
+		            type: 'POST',
+		            url: 'getPageRange.do',
+		            //data: paramData,
+		            dataType: 'json',
+		            success: function(result) {
+		            	console.log("test");
+		            	url = url + "?page=" + result.page;
+		            	url = url + "&range=" + result.range;
+		            	location.href = url;
+		           	},	   // Ajax success end
+		           	error: function (request, status, error){
+			   			console.log('error!');
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
+				});	// Ajax end
+			}
 			
 			//수정 버튼 클릭 이벤트
 			$(document).on('click', '#btnUpdate', function(){
@@ -190,7 +213,7 @@
 				<div style="margin-top : 20px">
 					<button type="button" class="btn btn-sm btn-primary" id="btnUpdate">수정</button>
 					<button type="button" class="btn btn-sm btn-primary" id="btnDelete">삭제</button>
-					<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+					<button type="button" class="btn btn-sm btn-primary" id="btnList" onclick=btnList()>목록</button>
 				</div>
 				<!-- Reply Form {s} -->
 				<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
