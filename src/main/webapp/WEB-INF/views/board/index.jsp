@@ -38,6 +38,7 @@
 		}
 		*/
 		
+		//2020.09.21 pms
 		function fn_contentView(bid, page, range){
 			console.log('showReplyList');
 			var url = "${pageContext.request.contextPath}/board/getBoardContent";
@@ -49,40 +50,16 @@
 					};
 			$.ajax({
 	            type: 'POST',
-	            url: 'toss_page_range.do',
+	            url: 'setPageRange.do',
 	            data: paramData,
 	            dataType: 'json',
 	            success: function(result) {
-	            	console.log("test");
-	            	console.log(result.bid);
-	            	console.log(result.page);
-	            	console.log(result.range);
-	            	location.href = url;
-					// $("#replyList").html(htmls);
-		           },	   // Ajax success end
-		           error: function (request, status, error){
+            		location.href = url;
+	           	},	   // Ajax success end
+	           	error: function (request, status, error){
 		   			console.log('error!');
 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			    }
-			});	// Ajax end
-		}
-		
-		//2020.09.21
-		function toss_page_range(bid, page, range){
-			console.log('showReplyList');
-			var url = "${pageContext.request.contextPath}/board/getBoardContent";
-			url = url + "?bid=" + bid;
-			var paramData = {"page" : page,
-							"range" : range	};
-			$.ajax({
-	            type: 'POST',
-	            url: '../toss_page_range.do',
-	            data: paramData,
-	            dataType: 'json',
-	            success: function(result) {
-	            	console.log("test");
-					// $("#replyList").html(htmls);
-		           }	   // Ajax success end
 			});	// Ajax end
 		}
 		
