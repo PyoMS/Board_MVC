@@ -84,18 +84,18 @@ public class BoardController {
 	 * 같은 일을 방지하기 위해 RedirectAttributes를 하게 되면 '저장단계' 를 지나 글쓰기 폼으로 돌아 가게 됩니다.
 	 * 따라서 글을 자동으로 도배할 수 없도록 할 수 있습니다.
 	 */
+	
 	@RequestMapping(value = "/saveBoard", method = RequestMethod.POST)
 	public String saveBoard(@ModelAttribute("BoardVO") BoardVO boardVO, // 화면에서 넘겨주는 값을 BoardVO와 매칭시켜 데이터를 받아 온다.
 			@RequestParam("mode") String mode, RedirectAttributes rttr) throws Exception { // RedirectAttributes를 사용하는 이유는 브라우저의 '뒤로가기'버튼에 대한 대응책.
 		System.out.println("@saveBoard");
-		if (mode.equals("mode")) {
+		if (mode.equals("edit")|| mode=="edit") {
 			boardService.updateBoard(boardVO);
 		} else {
 			boardService.insertBoard(boardVO);
 		}
 		return "redirect:/board/getBoardList";
 	}
-
 	// 상세조회
 	@RequestMapping(value = "/getBoardContent", method = RequestMethod.GET)
 	public String getBoardContent(Model model, @RequestParam("bid") int bid) throws Exception {
