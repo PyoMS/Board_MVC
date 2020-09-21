@@ -138,6 +138,7 @@
 							<th>작성자</th>
 							<th>조회수</th>
 							<th>작성일</th>
+							<th>수정일</th>
 						</tr>
 					</thead>
 
@@ -159,6 +160,7 @@
 										<td><c:out value="${list.reg_id}"/></td>
 										<td><c:out value="${list.view_cnt}"/></td>
 										<td><c:out value="${list.reg_dt}"/></td>
+										<td><c:out value="${list.edit_dt}"/></td>
 									</tr>
 								</c:forEach>
 							</c:when>
