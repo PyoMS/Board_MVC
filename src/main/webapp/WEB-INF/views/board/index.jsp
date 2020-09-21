@@ -23,16 +23,67 @@
 	 -->
 	 <c:url var="getBoardListURL" value="/board/getBoardList"></c:url>
 	<script>
+		var data = [];
 		$(document).on('click', '#btnWriteForm', function(e){
 			e.preventDefault(); //html 에서 a 태그나 submit 태그는 고유의 동작이 있다. 페이지를 이동시킨다거나 form 안에 있는 input 등을 전송한다던가 그러한 동작이 있는데 e.preventDefault 는 그 동작을 중단시킨다.
 			location.href = "${pageContext.request.contextPath}/board/boardForm"; // 컨텍스트가 바뀌거나 해도 소스 수정없이 처리하기 위해 pageContext.request.contextPath 사용
 		});
 
-		//url로 event 발생.
+		//url로 event 발생. -> 여기서 page / range도 같이 넘겨줄 것
+		/*
 		function fn_contentView(bid){
 			var url = "${pageContext.request.contextPath}/board/getBoardContent";
 			url = url + "?bid=" + bid;
 			location.href = url;
+		}
+		*/
+		
+		function fn_contentView(bid, page, range){
+			console.log('showReplyList');
+			var url = "${pageContext.request.contextPath}/board/getBoardContent";
+			url = url + "?bid=" + bid;
+			var paramData = { 
+					"bid" : bid,
+					"page" : page,
+					"range" : range
+					};
+			$.ajax({
+	            type: 'POST',
+	            url: 'toss_page_range.do',
+	            data: paramData,
+	            dataType: 'json',
+	            success: function(result) {
+	            	console.log("test");
+	            	console.log(result.bid);
+	            	console.log(result.page);
+	            	console.log(result.range);
+	            	location.href = url;
+					// $("#replyList").html(htmls);
+		           },	   // Ajax success end
+		           error: function (request, status, error){
+		   			console.log('error!');
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    }
+			});	// Ajax end
+		}
+		
+		//2020.09.21
+		function toss_page_range(bid, page, range){
+			console.log('showReplyList');
+			var url = "${pageContext.request.contextPath}/board/getBoardContent";
+			url = url + "?bid=" + bid;
+			var paramData = {"page" : page,
+							"range" : range	};
+			$.ajax({
+	            type: 'POST',
+	            url: '../toss_page_range.do',
+	            data: paramData,
+	            dataType: 'json',
+	            success: function(result) {
+	            	console.log("test");
+					// $("#replyList").html(htmls);
+		           }	   // Ajax success end
+			});	// Ajax end
 		}
 		
 		//이전 버튼 이벤트
@@ -122,15 +173,12 @@
 								<c:forEach var="list" items="${boardList}">
 									<tr>
 										<td><c:out value="${list.bid}"/></td>
-										
 										<td>
 										<!-- href는 동작하지 않게 설정-> href는 주소값으로 이동.. onClick으로 script function을 사용할 수 있도록 설정. 매개변수를 받아야 하므로. -->
-											<a href="#" onClick="fn_contentView(<c:out value="${list.bid}"/>)">
+											<a href="#" onClick="fn_contentView(<c:out value="${list.bid}"/>,<c:out value="${pagination.page}"/>, <c:out value="${pagination.range}"/>);">
 												<c:out value="${list.title}"/>
 											</a>
-											
 										</td>
-										
 										<td><c:out value="${list.reg_id}"/></td>
 										<td><c:out value="${list.view_cnt}"/></td>
 										<td><c:out value="${list.reg_dt}"/></td>

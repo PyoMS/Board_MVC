@@ -9,3 +9,15 @@ CREATE TABLE tbl_board(
   reg_dt   date          not null comment '작성일',
   edit_dt  date          not null comment '수정일'
 );
+
+
+create table tbl_reply(
+    rid int auto_increment comment '일련번호'  primary key,
+    bid int not null comment '게시물 일련번호',
+    content text        null comment '댓글내용',
+    reg_id  varchar(45) not null comment '작성자',
+    reg_dt  timestamp   not null comment '작성일',
+    edit_dt timestamp   not null comment '수정일',
+    constraint tbl_reply_tbl_board_bid_fk
+    foreign key (bid) references tbl_board (bid)
+);
