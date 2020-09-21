@@ -128,13 +128,13 @@ public class Pagination {
 		this.listCnt = listCnt;
 
 		// 전체 페이지수
-		this.pageCnt = (int) Math.ceil(listCnt / listSize);
+		this.pageCnt = (int) Math.ceil(listCnt / listSize) + 1;  // 2020.09.21 +1 로 수정
 
 		// 시작 페이지
 		this.startPage = (range - 1) * rangeSize + 1;
 
 		// 끝 페이지
-		this.endPage = range * rangeSize;
+		this.endPage = range * rangeSize ;
 
 		// 게시판 시작번호
 		this.startList = (page - 1) * listSize;
