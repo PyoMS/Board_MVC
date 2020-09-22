@@ -193,11 +193,6 @@
 				url = url + "?bid="+${boardContent.bid};
 				location.href = url;
 			});
-			<% 	pageContext.setAttribute("LF", "&lt;br&gt;"); 
-			pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
-	      	pageContext.setAttribute("br", "<br>"); //br 태그
-	      	//pageContext.setAttribute("br", "&lt;br/&gt;"); //br 태그
-	      %>
 
 		</script>
 	</head>
