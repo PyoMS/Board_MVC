@@ -193,6 +193,11 @@
 				url = url + "?bid="+${boardContent.bid};
 				location.href = url;
 			});
+			<% 	pageContext.setAttribute("LF", "&lt;br&gt;"); 
+			pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
+	      	pageContext.setAttribute("br", "<br>"); //br 태그
+	      	//pageContext.setAttribute("br", "&lt;br/&gt;"); //br 태그
+	      %>
 
 		</script>
 	</head>
@@ -207,7 +212,9 @@
 						<span class="board_author"><c:out value="${boardContent.reg_id}"/></span>
 						<span class="board_date"><c:out value="${boardContent.reg_dt}"/></span>
 					</div> 
-					<div class="board_content">${boardContent.content}</div>
+					<div class="board_content">
+						<pre><c:out value="${boardContent.content}"/></pre>
+					</div>
 					<div class="board_tag">TAG : <c:out value="${boardContent.tag}"/></div>
 				</div>
 				<div style="margin-top : 20px">
