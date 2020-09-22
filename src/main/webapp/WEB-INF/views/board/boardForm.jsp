@@ -22,6 +22,7 @@
 		<% 	pageContext.setAttribute("LF", "\n"); 
 			pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
 	      	pageContext.setAttribute("br", "<br/>"); //br 태그
+	      	//pageContext.setAttribute("br", "\r\n"); //br 태그
 	      %>
 		
 		//입력폼에 수정정보 입력
@@ -34,7 +35,9 @@
 			$("input:hidden[name='mode']").val('<c:out value="${mode}"/>');
 			$("#reg_id").val('<c:out value="${boardContent.reg_id}"/>');
 			$("#title").val('<c:out value="${boardContent.title}"/>');
-			$("#content").val('<c:out value="${fn:replace(boardContent.content, crcn, '<br>')}"/>'); // 2020.09.21 엔터키 입력된 값이 출력될 시 error 발생.
+			
+			$("#content").val('<c:out value="${fn:replace(boardContent.content, crcn, br)}"/>'); // 2020.09.22 엔터키 입력된 값이 출력될 시 error 발생.
+			
 			$("#tag").val('<c:out value="${boardContent.tag}"/>');
 		}
 	});
