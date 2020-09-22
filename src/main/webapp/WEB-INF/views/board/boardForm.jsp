@@ -19,28 +19,29 @@
 			location.href="${pageContext.request.contextPath}/board/getBoardList";
 		});
 		
-		<% 	pageContext.setAttribute("LF", "\n"); 
+		<% 	
 			pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
-	      	pageContext.setAttribute("br", "<br/>"); //br 태그
-	      	//pageContext.setAttribute("br", "\r\n"); //br 태그
-	      %>
+	      	pageContext.setAttribute("br", "\\r\\n"); //br 태그
+      	%>
 		
 		//입력폼에 수정정보 입력
 		$(document).ready(function(){
-		var mode = '<c:out value="${mode}"/>';
-		if ( mode == 'edit'){
-			//입력 폼 셋팅
-			$("#reg_id").prop('readonly', true);	// .prop : 속성값 가져옴.
-			$("input:hidden[name='bid']").val(<c:out value="${boardContent.bid}"/>);
-			$("input:hidden[name='mode']").val('<c:out value="${mode}"/>');
-			$("#reg_id").val('<c:out value="${boardContent.reg_id}"/>');
-			$("#title").val('<c:out value="${boardContent.title}"/>');
+			var mode = '<c:out value="${mode}"/>';
+			if ( mode == 'edit'){
+				//입력 폼 셋팅
+				$("#reg_id").prop('readonly', true);	// .prop : 속성값 가져옴.
+				$("input:hidden[name='bid']").val(<c:out value="${boardContent.bid}"/>);
+				$("input:hidden[name='mode']").val('<c:out value="${mode}"/>');
+				$("#reg_id").val('<c:out value="${boardContent.reg_id}"/>');
+				$("#title").val('<c:out value="${boardContent.title}"/>');
+				
+				$("#content").val('<c:out value="${fn:replace(boardContent.content, crcn, br)}" />'); // 2020.09.22 엔터키 입력된 값이 출력될 시 error 발생.
+				
+				$("#tag").val('<c:out value="${boardContent.tag}"/>');
+				
+			}
+		});
 			
-			$("#content").val('<c:out value="${fn:replace(boardContent.content, crcn, br)}"/>'); // 2020.09.22 엔터키 입력된 값이 출력될 시 error 발생.
-			
-			$("#tag").val('<c:out value="${boardContent.tag}"/>');
-		}
-	});
 		</script>
 		
 	</head>
