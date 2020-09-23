@@ -111,6 +111,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/deleteBoard", method = RequestMethod.GET)
 	public String deleteBoard(@RequestParam("bid") int bid, RedirectAttributes rttr) throws Exception { // Q) param으로 RedirectAttributes 쓰는 이유?
+		System.out.println("delete bid : " + bid);
 		boardService.deleteBoard(bid);
 		return "redirect:/board/getBoardList";
 	}
@@ -126,7 +127,7 @@ public class BoardController {
 	
 	@RequestMapping( value = "setPageRange.do", method=RequestMethod.POST)
 	public void setPageRange(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println("@@@ setPageRange");
+		System.out.println("@setPageRange");
 		try {
 			resultdata = new JSONObject();
 			resultdata.put("bid", request.getParameter("bid"));
@@ -144,7 +145,7 @@ public class BoardController {
 	
 	@RequestMapping( value = "getPageRange.do", method=RequestMethod.POST)
 	public void getPageRange(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println("@@@ setPageRange");
+		System.out.println("@getPageRange");
 		try {
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(resultdata);
@@ -169,12 +170,12 @@ public class BoardController {
 		System.out.println("bid : " + bid);
 		for (int i = 0; i < list.size(); i++) {
 			JSONObject data = new JSONObject();
-			System.out.println("rid : " + list.get(i).getRid());
-			System.out.println("bid : " + list.get(i).getBid());
-			System.out.println("content : " + list.get(i).getContent());
-			System.out.println("reg_id : " + list.get(i).getReg_id());
-			System.out.println("reg_dt : " + list.get(i).getReg_dt());
-			System.out.println("edit_dt : " + list.get(i).getEdit_dt());
+//			System.out.println("rid : " + list.get(i).getRid());
+//			System.out.println("bid : " + list.get(i).getBid());
+//			System.out.println("content : " + list.get(i).getContent());
+//			System.out.println("reg_id : " + list.get(i).getReg_id());
+//			System.out.println("reg_dt : " + list.get(i).getReg_dt());
+//			System.out.println("edit_dt : " + list.get(i).getEdit_dt());
 			
 			data.put("rid", list.get(i).getRid());
 			data.put("bid", list.get(i).getBid());
@@ -195,9 +196,9 @@ public class BoardController {
 			System.out.println("@saveReply");
 			
 			ReplyVO data = new ReplyVO();
-			System.out.println("request.getParameter(\"bid\") : "+ request.getParameter("bid"));
-			System.out.println("request.getParameter(\"content\") : "+ request.getParameter("content"));
-			System.out.println("request.getParameter(\"reg_id\") : "+ request.getParameter("reg_id"));
+//			System.out.println("request.getParameter(\"bid\") : "+ request.getParameter("bid"));
+//			System.out.println("request.getParameter(\"content\") : "+ request.getParameter("content"));
+//			System.out.println("request.getParameter(\"reg_id\") : "+ request.getParameter("reg_id"));
 			
 			data.setBid(Integer.parseInt(request.getParameter("bid")));
 			data.setContent(request.getParameter("content"));
@@ -220,8 +221,8 @@ public class BoardController {
 			System.out.println("@updateReply");
 			
 			ReplyVO data = new ReplyVO();
-			System.out.println("request.getParameter(\"rid\") : "+ request.getParameter("rid"));
-			System.out.println("request.getParameter(\"content\") : "+ request.getParameter("content"));
+//			System.out.println("request.getParameter(\"rid\") : "+ request.getParameter("rid"));
+//			System.out.println("request.getParameter(\"content\") : "+ request.getParameter("content"));
 			
 			data.setRid(Integer.parseInt(request.getParameter("rid")));
 			data.setContent(request.getParameter("content"));
@@ -239,7 +240,7 @@ public class BoardController {
 			System.out.println("@deleteReply");
 			
 			int data = Integer.parseInt(request.getParameter("rid"));
-			System.out.println("request.getParameter(\"rid\") : "+ request.getParameter("rid"));
+//			System.out.println("request.getParameter(\"rid\") : "+ request.getParameter("rid"));
 			
 			boardService.deleteReply(data);
 		} catch (Exception e) {

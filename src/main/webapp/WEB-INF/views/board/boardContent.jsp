@@ -29,7 +29,7 @@
 			            var htmls = "";
 			            console.log('result.length : ' + result.length);
 						if(result.length < 1){
-							htmls.push("등록된 댓글이 없습니다.");
+							htmls += ("등록된 댓글이 없습니다.");
 						} else {
 							
 			                    $(result).each(function(){
@@ -62,11 +62,19 @@
 			}
 			//reply List(e)
 			
+			<% 	
+			pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
+	      	pageContext.setAttribute("br", "\\r\\n"); //br 태그
+      		%>
+			
 			//댓글 저장 버튼 클릭 이벤트
 			$(document).on('click', '#btnReplySave', function(e){
 				e.preventDefault();
-				console.log('@saveButton click');
+				//console.log('@saveButton click');
 				var replyContent = $('#content').val();
+				//replyContent.replace("\n","\\n"); //2020.09.23 pms 개행 문자 처리
+				replyContent.replace(/\n/gi,/\\n/);
+				//console.log("@transform replyContent : " + replyContent);
 				var replyReg_id = $('#reg_id').val();
 				var paramData = {"content": replyContent
 						, "reg_id": replyReg_id
@@ -96,6 +104,7 @@
 			//댓글 수정 클릭시 ui 변환
 			function fn_editReply(rid, reg_id, content){
 				console.log('fn_editReply');
+				console.log(content);
 				var htmls = "";
 				htmls += '<div class="media text-muted pt-3" id="rid' + this.rid + '">';
 				htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
