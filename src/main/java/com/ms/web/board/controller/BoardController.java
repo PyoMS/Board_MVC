@@ -73,11 +73,12 @@ public class BoardController {
 		List<ReplyVO> list = new ArrayList<ReplyVO>();
 		list = boardService.getReplyList(bid);
 		
-		JSONObject data = new JSONObject();
+		List<JSONObject> jsonlist = new ArrayList<>();
 		
 		System.out.println("list.size() : "+list.size());
 		System.out.println("bid : " + bid);
 		for (int i = 0; i < list.size(); i++) {
+			JSONObject data = new JSONObject();
 			System.out.println("rid : " + list.get(i).getRid());
 			System.out.println("bid : " + list.get(i).getBid());
 			System.out.println("content : " + list.get(i).getContent());
@@ -91,10 +92,12 @@ public class BoardController {
 			data.put("reg_id", list.get(i).getReg_id());
 			data.put("reg_dt", list.get(i).getReg_dt());
 			data.put("edit_dt", list.get(i).getEdit_dt());
+			
+			jsonlist.add(data);
 		}
 		
 		response.setContentType("application/x-json; charset=UTF-8");
-		response.getWriter().print(data);
+		response.getWriter().print(jsonlist);
 		
 	}
 
