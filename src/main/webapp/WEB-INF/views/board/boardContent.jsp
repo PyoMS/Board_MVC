@@ -147,7 +147,7 @@
 			function fn_deleteReply(rid){
 				var paramData = {"rid": rid};
 				$.ajax({
-					url: "${deleteReplyURL}"
+					url: "${pageContext.request.contextPath}/board/deleteReply"
 					, data : paramData
 					, type : 'POST'
 					, dataType : 'text'

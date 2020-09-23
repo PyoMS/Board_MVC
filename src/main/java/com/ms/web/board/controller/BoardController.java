@@ -232,5 +232,19 @@ public class BoardController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.POST, produces = "application/json")	
+	public void deleteReply(HttpServletRequest request, HttpServletResponse response) throws Exception { // @RequestBody??
+		try {
+			System.out.println("@deleteReply");
+			
+			int data = Integer.parseInt(request.getParameter("rid"));
+			System.out.println("request.getParameter(\"rid\") : "+ request.getParameter("rid"));
+			
+			boardService.deleteReply(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
