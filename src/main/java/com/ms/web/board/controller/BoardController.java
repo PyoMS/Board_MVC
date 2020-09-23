@@ -1,6 +1,7 @@
 package com.ms.web.board.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,11 +66,36 @@ public class BoardController {
 		return "board/index"; // return 되는 화면의 주소값. (단순 String x)
 	}
 	
-	@ResponseBody 	// 비동기식 방법
 	@RequestMapping(value = "/getReplyList", method = RequestMethod.POST, produces = "application/json")
-	public List<ReplyVO> getReplyList(int bid) throws Exception{
+	public void getReplyList(int bid, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("@getReplyList");
-		return boardService.getReplyList(bid);
+		
+		List<ReplyVO> list = new ArrayList<ReplyVO>();
+		list = boardService.getReplyList(bid);
+		
+		JSONObject data = new JSONObject();
+		
+		System.out.println("list.size() : "+list.size());
+		System.out.println("bid : " + bid);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("rid : " + list.get(i).getRid());
+			System.out.println("bid : " + list.get(i).getBid());
+			System.out.println("content : " + list.get(i).getContent());
+			System.out.println("reg_id : " + list.get(i).getReg_id());
+			System.out.println("reg_dt : " + list.get(i).getReg_dt());
+			System.out.println("edit_dt : " + list.get(i).getEdit_dt());
+			
+			data.put("rid", list.get(i).getRid());
+			data.put("bid", list.get(i).getBid());
+			data.put("content", list.get(i).getContent());
+			data.put("reg_id", list.get(i).getReg_id());
+			data.put("reg_dt", list.get(i).getReg_dt());
+			data.put("edit_dt", list.get(i).getEdit_dt());
+		}
+		
+		response.setContentType("application/x-json; charset=UTF-8");
+		response.getWriter().print(data);
+		
 	}
 
 	@RequestMapping("/boardForm")
@@ -131,16 +157,29 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "/saveReply", method = RequestMethod.POST, produces = "application/json")	
-	public Map<String, Object> saveReply(@RequestBody ReplyVO replyVO) throws Exception { // @RequestBody??
+	public void saveReply(ReplyVO replyVO, HttpServletRequest request, HttpServletResponse response) throws Exception { // @RequestBody??
 		Map<String, Object> result = new HashMap<>();
 		try {
-			boardService.saveReply(replyVO);
-			result.put("status", "OK");
+			System.out.println("@saveReply");
+			
+			ReplyVO data = new ReplyVO();
+			System.out.println("Integer.parseInt(request.getParameter(\"bid\")) : "+ request.getParameter("bid"));
+			System.out.println("request.getParameter(\"content\") : "+ request.getParameter("content"));
+			System.out.println("request.getParameter(\"reg_id\") : "+ request.getParameter("reg_id"));
+			
+			data.setBid(Integer.parseInt(request.getParameter("bid")));
+			data.setContent(request.getParameter("content"));
+			data.setReg_id(request.getParameter("reg_id")); // reg_id
+			boardService.saveReply(data);
+			
+//			response.setContentType("application/x-json; charset=UTF-8");
+//			response.getWriter().print("");
+//			result.put("status", "OK");
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.put("status", "False");
+//			result.put("status", "False");
 		}
-		return result;
+//		return result;
 	}
 	
 	@RequestMapping( value = "setPageRange.do", method=RequestMethod.POST)

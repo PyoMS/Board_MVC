@@ -18,18 +18,19 @@
 				console.log('showReplyList');
 				var url = "${pageContext.request.contextPath}/board/getReplyList";
 				var paramData = {"bid" : "${boardContent.bid}"};
-				console.log('what is boardContent : ${boardContent}');
+				console.log('what is boardContent : ${boardContent.bid}');
 				$.ajax({
 		            type: 'POST',
 		            url: url,
 		            data: paramData,
 		            dataType: 'json',
 		            success: function(result) {
-		            	console.log("test");
 			            var htmls = "";
+			            console.log('result.length : ' + result.length);
 						if(result.length < 1){
 							htmls.push("등록된 댓글이 없습니다.");
 						} else {
+							
 			                    $(result).each(function(){
 			                     htmls += '<div class="media text-muted pt-3" id="rid' + this.rid + '">';
 			                     htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
@@ -51,7 +52,11 @@
 				                });	//each end
 							}
 						$("#replyList").html(htmls);
-			           }	   // Ajax success end
+			           },	   // Ajax success end
+		           	error: function (request, status, error){
+			   			console.log('error!');
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
 				});	// Ajax end
 			}
 			//reply List(e)
@@ -62,26 +67,28 @@
 				console.log('@saveButton click');
 				var replyContent = $('#content').val();
 				var replyReg_id = $('#reg_id').val();
-				var paramData = JSON.stringify({"content": replyContent
+				var paramData = {"content": replyContent
 						, "reg_id": replyReg_id
 						, "bid":'${boardContent.bid}'
-				});
+				};
+				
 				var headers = {"Content-Type" : "application/json"
 						, "X-HTTP-Method-Override" : "POST"};
 				$.ajax({
 					url: "${pageContext.request.contextPath}/board/saveReply"
-					, headers : headers
+					//, headers : headers
 					, data : paramData
 					, type : 'POST'
 					, dataType : 'text'
-					, success: function(result){
+					, success: function(){
 						showReplyList();
 						$('#content').val('');
 						$('#reg_id').val('');
 					}
-					, error: function(error){
-						console.log("에러 : " + error);
-					}
+					, error: function (request, status, error){ // Ajax success end
+			   			console.log('error!');
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
 				});
 			});
 			
