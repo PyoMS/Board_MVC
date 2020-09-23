@@ -10,7 +10,7 @@ CREATE TABLE tbl_board(
   edit_dt  timestamp          not null comment '수정일'
 );
 
-
+-- 제약조건에 cascade 추가 2020.09.23
 create table tbl_reply(
     rid int auto_increment comment '일련번호'  primary key,
     bid int not null comment '게시물 일련번호',
@@ -19,5 +19,9 @@ create table tbl_reply(
     reg_dt  timestamp   not null comment '작성일',
     edit_dt timestamp   not null comment '수정일',
     constraint tbl_reply_tbl_board_bid_fk
-    foreign key (bid) references tbl_board (bid)
+    foreign key (bid) references tbl_board (bid) on delete cascade
 );
+
+ALTER table tbl_reply add constraint tbl_reply_tbl_board_bid_fk foreign key(bid) references tbl_board(bid) on delete cascade;
+
+ALTER TABLE tbl_reply DROP CONSTRAINT tbl_reply_tbl_board_bid_fk;
