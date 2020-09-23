@@ -26,7 +26,7 @@
 //	private BoardService boardService;
 //
 //
-//	@RequestMapping(value = "/getReqlyList", method = RequestMethod.POST)
+//	@RequestMapping(value = "/getReplyList", method = RequestMethod.POST)
 //	public List<ReplyVO> getReplyList(@RequestParam("bid") int bid) throws Exception {
 //		return boardService.getReplyList(bid);
 //	}

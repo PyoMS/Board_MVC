@@ -7,6 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>board</title>
+		<c:url var="updateReplyURL" value="/board/updateReply"></c:url>
 		<script>
 			$(document).ready(function(){
 				showReplyList();
@@ -71,7 +72,7 @@
 						, "reg_id": replyReg_id
 						, "bid":'${boardContent.bid}'
 				};
-				
+				console.log('paramData : ' + paramData);
 				var headers = {"Content-Type" : "application/json"
 						, "X-HTTP-Method-Override" : "POST"};
 				$.ajax({
@@ -92,7 +93,7 @@
 				});
 			});
 			
-			//댓글 수정
+			//댓글 수정 클릭시 ui 변환
 			function fn_editReply(rid, reg_id, content){
 				console.log('fn_editReply');
 				var htmls = "";
@@ -119,26 +120,28 @@
 				$('#rid' + rid + ' #editContent').focus();
 			}
 			
+			// 댓글 수정 시 실질적으로 update 처리 하는 부분
 			function fn_updateReply(rid, reg_id){
 				var replyEditContent = $('#editContent').val();
-				var paramData = JSON.stringify({"content": replyEditContent
-						, "rid": rid
-				});
+				var paramData = {"content": replyEditContent
+						, "rid": rid};
+				console.log('paramData : ' + paramData);
 				var headers = {"Content-Type" : "application/json"
 						, "X-HTTP-Method-Override" : "POST"};
 				$.ajax({
-					url: "${updateReplyURL}"
-					, headers : headers
+					url: "${pageContext.request.contextPath}/board/updateReply"
+					//, headers : headers
 					, data : paramData
 					, type : 'POST'
 					, dataType : 'text'
-					, success: function(result){
-		                                console.log(result);
+					, success: function(){
+						console.log('fn_updateReply success');
 						showReplyList();
 					}, 
-					error: function(error){
-						console.log("에러 : " + error);
-					}
+					error: function (request, status, error){ // Ajax success end
+			   			console.log('error!');
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
 				});
 			}
 			function fn_deleteReply(rid){
