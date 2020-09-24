@@ -8,6 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>board</title>
 		<c:url var="updateReplyURL" value="/board/updateReply"></c:url>
+		<script src="${pageContext.request.contextPath}/resources/common/ckeditor/ckeditor.js"></script>
 		<script>
 			$(document).ready(function(){
 				showReplyList();
@@ -170,13 +171,6 @@
 			}
 		</script>
 		<script type="text/javascript">
-			//목록 버튼
-			/*
-			$(document).on('click', '#btnList', function(e){
-				e.preventDefault();
-				location.href="${pageContext.request.contextPath}/board/getBoardList"; //TODO 2020.09.18 href로 떨어졌을 때, 이전 page정보 받을 수 있나
-			});
-			*/
 			
 			//목록 버튼 대체 function - ajax 2020.09.21 pms
 			function btnList(){
@@ -212,6 +206,22 @@
 				url = url + "?bid="+${boardContent.bid};
 				location.href = url;
 			});
+			
+			function unescapeHTML(escapedHTML) {
+				return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+			}
+			/*
+			var htmls = unescapeHTML('<c:out value="${boardContent.content}"/>');
+			console.log('test : ' + htmls);
+			
+			function escapeHtml(text) {
+				var div = document.createElement('div'); 
+				div.innerText = text; 
+				return div.innerHTML; 
+			}
+			*/
+			
+			//$('#board_content').html(htmls);
 
 		</script>
 	</head>
@@ -226,9 +236,7 @@
 						<span class="board_author"><c:out value="${boardContent.reg_id}"/></span>
 						<span class="board_date"><c:out value="${boardContent.reg_dt}"/></span>
 					</div> 
-					<div class="board_content">
-						<pre><c:out value="${boardContent.content}"/></pre>
-					</div>
+					<div class="board_content"><c:out value="${boardContent.content}"/></div>
 					<div class="board_tag">TAG : <c:out value="${boardContent.tag}"/></div>
 				</div>
 				<div style="margin-top : 20px">
@@ -244,6 +252,7 @@
 						<div class="col-sm-10">
 							<form:textarea path="content" type="text" id="content" class="form-control" rows="3" placeholder="댓글을 입력해 주세요"></form:textarea>
 						</div>
+						
 						<div class="col-sm-2">
 							<form:input path="reg_id" type="text" class="form-control" id="reg_id" placeholder="댓글 작성자"></form:input>
 							<button type="button" class="btn btn-sm btn-primary" id="btnReplySave" style="width: 100%; margin-top: 10px"> 저 장 </button>
