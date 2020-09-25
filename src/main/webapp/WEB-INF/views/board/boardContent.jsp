@@ -210,8 +210,9 @@
 			function unescapeHTML(escapedHTML) {
 				return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
 			}
-			/*
-			var htmls = unescapeHTML('<c:out value="${boardContent.content}"/>');
+			/* 
+			var data = {'<c:out value="${boardContent.content}"/>'};
+			var htmls = unescapeHTML(data);
 			console.log('test : ' + htmls);
 			
 			function escapeHtml(text) {
@@ -219,10 +220,9 @@
 				div.innerText = text; 
 				return div.innerHTML; 
 			}
-			*/
 			
-			//$('#board_content').html(htmls);
-
+			$('#board_content').html(htmls);
+			*/
 		</script>
 	</head>
 	<body>
@@ -236,7 +236,7 @@
 						<span class="board_author"><c:out value="${boardContent.reg_id}"/></span>
 						<span class="board_date"><c:out value="${boardContent.reg_dt}"/></span>
 					</div> 
-					<div class="board_content"><c:out value="${boardContent.content}"/></div>
+					<div class="board_content"><pre><c:out value="${boardContent.content}"/></pre></div>
 					<div class="board_tag">TAG : <c:out value="${boardContent.tag}"/></div>
 				</div>
 				<div style="margin-top : 20px">

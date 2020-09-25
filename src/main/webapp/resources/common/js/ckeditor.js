@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+/*
 ClassicEditor 
     .create( document.querySelector( '#content' ) ) 
     .then( editor => { 
@@ -10,3 +10,4 @@ ClassicEditor
     .catch( error => { 
         console.error( error ); 
     } );
+*/
