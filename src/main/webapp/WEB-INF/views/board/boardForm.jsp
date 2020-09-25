@@ -71,7 +71,6 @@
 						<form:textarea path="content" class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요"/>
 						<script>
 							CKEDITOR.replace( 'content' , {height: 300});
-							CKEDITOR.config.basicEntities = false;
 						</script>
 						<!--script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script-->
 					</div>
