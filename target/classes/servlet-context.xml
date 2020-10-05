@@ -23,10 +23,27 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+<!-- 		<beans:property name="order" value="1" /> tiles3 를 적용할 때 우선순위를 2로 설정. tiles가 먼저 실행될 것. -->
 	</beans:bean>
 	
 	<context:component-scan base-package="com.ms.web" />
 	
+	
+	<!-- 2020.09.28 Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory --> 
+	<!-- Tiles View Resolver --> 
+<!-- 	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">  -->
+<!-- 		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />  -->
+<!-- 		<beans:property name="order" value="1" />  -->
+<!-- 	</beans:bean>  -->
+	
+	<!-- Tiles Configurer -->
+<!-- 	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">  -->
+<!-- 		<beans:property name="definitions">  -->
+<!-- 			<beans:list>  -->
+<!-- 				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>  -->
+<!-- 			</beans:list>  -->
+<!-- 		</beans:property>  -->
+<!-- 	</beans:bean> -->
 	
 	
 </beans:beans>

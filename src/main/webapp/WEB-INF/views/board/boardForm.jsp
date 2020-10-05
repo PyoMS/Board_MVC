@@ -15,11 +15,13 @@
 			e.preventDefault();
 			$("#form").submit();
 		});
-	
+		
+		/*
 		$(document).on('click', '#btnList', function(e){
 			e.preventDefault();
 			location.href="${pageContext.request.contextPath}/board/getBoardList";
 		});
+		*/
 		
 		<% 	
 			pageContext.setAttribute("crcn", "\r\n"); //Space, Enter
@@ -43,6 +45,27 @@
 				
 			}
 		});
+		
+		//2020.10.05
+		function btnList(){
+			var url = "${pageContext.request.contextPath}/board/getBoardList";
+			$.ajax({
+	            type: 'POST',
+	            url: 'getPageRange.do',
+	            //data: paramData,
+	            dataType: 'json',
+	            success: function(result) {
+	            	console.log("test");
+	            	url = url + "?page=" + result.page;
+	            	url = url + "&range=" + result.range;
+	            	location.href = url;
+	           	},	   // Ajax success end
+	           	error: function (request, status, error){
+		   			console.log('error!');
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    }
+			});	// Ajax end
+		}
 			
 		</script>
 		
@@ -71,6 +94,7 @@
 						<form:textarea path="content" class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요"/>
 						<script>
 							CKEDITOR.replace( 'content' , {height: 300});
+							CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR; // 엔터키 입력시 br 태그 변경
 						</script>
 						<!--script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script-->
 					</div>
@@ -82,7 +106,7 @@
 				</form:form>
 				<div >
 					<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-					<button type="button" class="btn btn-sm btn-primary" id="btnList">목록</button>
+					<button type="button" class="btn btn-sm btn-primary" id="btnList" onClick=btnList();>목록</button>
 				</div>
 			</div>
 		</article>
