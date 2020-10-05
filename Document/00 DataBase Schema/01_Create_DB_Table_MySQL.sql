@@ -25,3 +25,17 @@ create table tbl_reply(
 ALTER table tbl_reply add constraint tbl_reply_tbl_board_bid_fk foreign key(bid) references tbl_board(bid) on delete cascade;
 
 ALTER TABLE tbl_reply DROP CONSTRAINT tbl_reply_tbl_board_bid_fk;
+
+
+-- menu 테이블 추가.
+create table tbl_menu (   
+    mid int auto_increment primary key comment '메뉴번호',   
+    code     varchar(10) not null comment '코드',   
+    codename varchar(50)   null comment '코드명', 
+    sort_num int null           comment '정렬번호',   
+    comment  varchar(1000) null comment '코멘트',   
+    reg_id   varchar(20)   null comment '등록ID',   
+    reg_dt   timestamp     null comment '등록일자',   
+    constraint tbl_menu_code_uindex unique (code) 
+);
+-- code 값은 '유니크'한 값을 가져야함. constraint 설정.
