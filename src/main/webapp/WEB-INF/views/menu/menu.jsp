@@ -79,11 +79,11 @@
 		$.ajax({
 			url : url , 
 			type : "POST" , 
-			dataType : "TEXT" , // 2020.10.08 JSON 시 ajax 타입 오류 발생.. data값이 null값이라 발생하는 듯.
-			data : paramData , 
+			dataType : "text" , // 2020.10.08 JSON 시 ajax 타입 오류 발생.. data값이 null값이라 발생하는 듯. -> 서버에서 받을 데이터 타입.
+			data : paramData , //서버에 전송할 데이터
 			success : 
-				function(result){ 
-					//console.log('result : ' + result);
+				function(){ 
+					//console.log('result.length : ' + result.length);
 					fn_showList(); 
 					//초기화 이벤트 호출
 					$("#btnInit").trigger("click");
