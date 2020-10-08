@@ -22,7 +22,6 @@
 	
 	function fn_showList(){ 
 		console.log('fn_showList()');
-		console.log('before : ${getMenuListURL}');
 		var paramData = {}; 
 		$.ajax(
 			{ 
@@ -32,8 +31,6 @@
 				dataType : "json" ,
 				data : paramData , 
 				success : function(result){
-					console.log('success');
-					console.log('result.length : '+result.length); 
 					if (result.length >= 1){
 						//var list = result.menuList; 
 						var htmls = ""; 
@@ -71,8 +68,7 @@
 		e.preventDefault(); 
 		console.log('save button');
 		var url = "${saveURL}"; 
-		console.log('url : ' + url);
-		if ($("#mid").val() != 0) { var url = "${updateURL}"; }
+		if ($("#mid").val() != 0) { url = "${updateURL}"; }
 
 		var paramData = {
 			"code" : $('#code').val() , 
@@ -80,18 +76,22 @@
 			"sort_num" : $('#sort_num').val() , 
 			"comment" : $('#comment').val()
 		}; 
-		console.log('parameter : ' + paramData.code);
 		$.ajax({
 			url : url , 
 			type : "POST" , 
-			dataType : "json" , 
+			dataType : "TEXT" , // 2020.10.08 JSON 시 ajax 타입 오류 발생.. data값이 null값이라 발생하는 듯.
 			data : paramData , 
 			success : 
 				function(result){ 
+					//console.log('result : ' + result);
 					fn_showList(); 
 					//초기화 이벤트 호출
 					$("#btnInit").trigger("click");
-				}
+				},
+			error: function (request, status, error){
+	   			console.log('error!');
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
 		}); 
 	});
 	
@@ -99,7 +99,7 @@
 		$('#mid').val(''); 
 		$('#code').val('');
 		$('#codename').val('');
-		$('#sort_num').val('');
+		$('#sort_num').val('0');
 		$('#comment').val(''); 
 	});
 	
@@ -126,7 +126,7 @@
 		$.ajax({
 			url : url , 
 			type : "POST" , 
-			dataType : "json" , 
+			dataType : "text" , // 2020.10.08 btnSave와 동일.
 			data : paramData , 
 			success : function(result){ 
 				fn_showList();  

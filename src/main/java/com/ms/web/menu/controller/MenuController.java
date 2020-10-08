@@ -42,7 +42,7 @@ public class MenuController {
 	@Inject
 	private MenuService menuService;
 	
-	@RequestMapping(value="/getMenuList", method=RequestMethod.POST)
+	@RequestMapping(value="/getMenuList", method=RequestMethod.POST, produces = "application/json")
 	public void getMenuList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("@getMenuList");
 		try {
@@ -63,6 +63,8 @@ public class MenuController {
 				
 				jsonlist.add(data);
 			}
+			
+			
 			
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(jsonlist);
