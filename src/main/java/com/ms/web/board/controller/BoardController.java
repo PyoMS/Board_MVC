@@ -2,9 +2,7 @@ package com.ms.web.board.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ms.web.board.model.BoardVO;
@@ -29,7 +25,6 @@ import com.ms.web.board.model.ReplyVO;
 import com.ms.web.board.service.BoardService;
 import com.ms.web.common.Search;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 @Controller
