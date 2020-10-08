@@ -28,7 +28,6 @@ import com.ms.web.menu.service.MenuService;
 public class MenuController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
-	private JSONObject resultdata = null;
 	
 	@RequestMapping(value = "/getMenu", method = RequestMethod.GET)
 	public String getMenuList(Model model) throws Exception{
@@ -48,7 +47,6 @@ public class MenuController {
 		try {
 			List<MenuVO> menuVOlist = new ArrayList<>();
 			menuVOlist = menuService.getMenuList();
-			System.out.println("menuVOlist.size() : "+menuVOlist.size());
 			
 			List<JSONObject> jsonlist = new ArrayList<>();
 			for (int i = 0; i < menuVOlist.size(); i++) {
@@ -64,8 +62,6 @@ public class MenuController {
 				jsonlist.add(data);
 			}
 			
-			
-			
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(jsonlist);
 		} catch (Exception e) {
@@ -77,16 +73,16 @@ public class MenuController {
 	}
 	
 	@RequestMapping(value="/saveMenu", method=RequestMethod.POST)
-	public void saveMenu(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Map<String, Object> result = new HashMap<>();
+	public void saveMenu(MenuVO menuVO, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 //		logger.info("menuVO : " + menuVO.toString());
 		try {
-			MenuVO menuVO = new MenuVO();
-			menuVO.setCode(request.getParameter("code"));
-			menuVO.setCodename(request.getParameter("codename"));
-			menuVO.setSort_num(Integer.parseInt(request.getParameter("sort_num")));
-			menuVO.setComment(request.getParameter("comment"));
+			// 2020.10.08 Spring에서는 해당 VO 클래스를 단순히 파라미터로 지정하므로써 자동적으로 처리할 수 있다.
+//			MenuVO menuVO = new MenuVO();
+//			menuVO.setCode(request.getParameter("code"));
+//			menuVO.setCodename(request.getParameter("codename"));
+//			menuVO.setSort_num(Integer.parseInt(request.getParameter("sort_num")));
+//			menuVO.setComment(request.getParameter("comment"));
 			
 //			System.out.println("menuVO.getCode() : " + menuVO.getCode());
 //			System.out.println("menuVO.getCodename() : "+menuVO.getCodename());
@@ -105,15 +101,13 @@ public class MenuController {
 	}
 	
 	@RequestMapping(value="/updateMenu", method=RequestMethod.POST)
-	public void updateMenu(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Map<String, Object> result = new HashMap<>();
-		
+	public void updateMenu(MenuVO menuVO, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		try {
-			MenuVO menuVO = new MenuVO();
-			menuVO.setCode(request.getParameter("code"));
-			menuVO.setCodename(request.getParameter("codename"));
-			menuVO.setSort_num(Integer.parseInt(request.getParameter("sort_num")));
-			menuVO.setComment(request.getParameter("comment"));
+//			MenuVO menuVO = new MenuVO();
+//			menuVO.setCode(request.getParameter("code"));
+//			menuVO.setCodename(request.getParameter("codename"));
+//			menuVO.setSort_num(Integer.parseInt(request.getParameter("sort_num")));
+//			menuVO.setComment(request.getParameter("comment"));
 			
 			menuService.updateMenu(menuVO);
 //			result.put("status", "OK");
@@ -128,8 +122,6 @@ public class MenuController {
 	
 	@RequestMapping(value="/deleteMenu", method=RequestMethod.POST)
 	public void deleteMenu(HttpServletRequest request, HttpServletResponse response, @RequestParam("code") String code) throws Exception{
-		Map<String, Object> result = new HashMap<>();
-		
 		try {
 			menuService.deleteMenu(code);
 //			result.put("status", "OK");
