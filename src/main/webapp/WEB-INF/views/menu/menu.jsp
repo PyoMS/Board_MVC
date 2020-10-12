@@ -28,13 +28,18 @@
 				url : "${getMenuListURL}" ,
 				//url : url,
 				type : "POST" , 
-				dataType : "json" ,
+				//dataType : "json" , //controller -> jsp
+				dataType : "text",
 				data : paramData , 
 				success : function(result){
-					if (result.length >= 1){
+					var res = [];
+					res = JSON.parse(result);
+					console.log(res);
+					console.log('result.length : '+res.length);
+					if (res.length >= 1){
 						//var list = result.menuList; 
 						var htmls = ""; 
-						$(result).each(function() { 
+						$(res).each(function() { 
 							htmls += '<tr>'; 
 							htmls += '<td>' + this.mid + '</td>'; 
 							
@@ -50,7 +55,7 @@
 							htmls += '<td>' + this.sort_num + '</td>'; 
 							htmls += '<td>' + this.comment + '</td>'; 
 							htmls += '</tr>'; }); 
-					} 
+					}
 					else {
 						console.log("조회실패"); 
 					} 
