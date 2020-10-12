@@ -41,7 +41,6 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public int updateViewCnt(int bid) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.update("com.ms.web.board.boardMapper.updateViewCnt", bid);
 	}
 

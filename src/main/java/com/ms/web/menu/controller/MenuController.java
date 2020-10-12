@@ -41,7 +41,7 @@ public class MenuController {
 	@Inject
 	private MenuService menuService;
 	
-	@RequestMapping(value="/getMenuList", method=RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value="/getMenuList", method=RequestMethod.POST)
 	public void getMenuList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("@getMenuList");
 		try {
@@ -62,8 +62,13 @@ public class MenuController {
 				jsonlist.add(data);
 			}
 			
+			//TODO 2020.10.12 Test гр ╟м.
+//			JSONObject result = new JSONObject();
+//			result.put("menuList", menuService.getMenuList());
+			
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(jsonlist);
+//			response.getWriter().print(menuService.getMenuList());
 		} catch (Exception e) {
 //			result.put("status", "False");
 			e.printStackTrace();
@@ -91,7 +96,7 @@ public class MenuController {
 			logger.info("menuVO : " + menuVO.toString());
 			menuService.saveMenu(menuVO);
 //			result.put("status", "OK");
-		} catch (Exception e) {
+		}catch (Exception e) {
 //			result.put("status", "False");
 			e.printStackTrace();
 			logger.info(e.getMessage());
@@ -131,7 +136,6 @@ public class MenuController {
 			logger.info(e.getMessage());
 			throw e;
 		}
-		
 //		return result;
 	}
 

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!-- login form {s} --> 
 
+	<!-- login form {s} --> 
 	<form:form class="form-signin" name="form" id="form" role="form" modelAttribute="userVO" 
 	method="post" action="${pageContext.request.contextPath}/board/saveBoard"> 
 		<div class="text-center mb-4"> 
@@ -20,6 +20,5 @@
 		<span style="font-size:11pt;">Sign up</span> 
 		<p class="mt-5 mb-3 text-muted text-center">© 2019. PMS. All rights reserved.</p> 
 	</form:form> 
-		
-<!-- login form {e} -->
+	<!-- login form {e} -->
 

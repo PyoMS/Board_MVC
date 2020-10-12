@@ -39,3 +39,14 @@ create table tbl_menu (
     constraint tbl_menu_code_uindex unique (code) 
 );
 -- code 값은 '유니크'한 값을 가져야함. constraint 설정.
+
+-- 회원정보 2020.10.12
+create table tbl_user ( 
+    uid varchar(20) not null primary key comment '유저ID', 
+    name varchar(100) not null comment '이름', 
+    pwd varchar(100) not null comment '비밀번호', 
+    email varchar(100) null comment '이메일', 
+    grade varchar(30) null comment '등급', 
+    reg_dt timestamp null comment '등록날짜' 
+);
+
