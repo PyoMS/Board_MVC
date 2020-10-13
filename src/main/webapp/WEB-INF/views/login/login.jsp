@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,14 +28,13 @@
 				<form:password path="pwd" id="pwd" class="form-control" placeholder="User Password" required="" /> 
 				<label for="pwd" class="sr-only">User Password</label> 
 			</div> 
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> 
-			<span style="font-size:11pt;">Sign up</span> 
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button> 
 			<p class="mt-5 mb-3 text-muted text-center">© 2020. PMS. All rights reserved.</p> 
 		</form:form> 
 		
 		<!-- login form {e} -->
 		<span style="font-size:11pt;"> 
-		<a href="#" onClick="fn_btnSignupClick()">Sign up</a> 
+			<a href="#" onClick="fn_btnSignupClick()">Sign up</a> 
 		</span> 
 	</body>
 </html>
