@@ -9,9 +9,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script> 
+
+	//아이디 중복 추가할 것.
+// 	$(document).on('click', '#btnSignup', function(e){
+// 	});
+	
+	
 	$(document).on('click', '#btnSignup', function(e){ 
 		e.preventDefault(); 
-		$("#form").submit(); 
+		if($('#pwd1') == $('#pwd2')){
+			$("#form").submit(); 
+		}
+		else{
+			alert('비밀번호가 일치하지 않습니다.');
+		}
 		}
 	); 
 	
@@ -22,7 +33,7 @@
 		$('#pwd1').val(''); 
 		$('#pwd2').val(''); 
 		$('#email').val('');
-		//location.href="${pageContext.request.contextPath}/home"; 
+		location.href="${pageContext.request.contextPath}/login/login"; 
 		}
 	); 
 </script>
