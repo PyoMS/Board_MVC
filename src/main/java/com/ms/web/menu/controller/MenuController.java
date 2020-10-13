@@ -62,7 +62,7 @@ public class MenuController {
 				jsonlist.add(data);
 			}
 			
-			//TODO 2020.10.12 Test гр ╟м.
+			
 //			JSONObject result = new JSONObject();
 //			result.put("menuList", menuService.getMenuList());
 			

@@ -7,7 +7,12 @@
 <mapper namespace="com.ms.web.user.userMapper">
 	<select id="getUserInfo" resultType="com.ms.web.user.model.UserVO">
 		SELECT
-			UID, NAME, PWD, EMAIL, GRADE, REG_DT
+			UID
+			, NAME
+			, PWD
+			, EMAIL
+			, GRADE
+			, REG_DT
 		FROM
 			TBL_USER
 		WHERE
@@ -16,7 +21,12 @@
 	
 	<select id="getUserList" resultType="com.ms.web.user.model.UserVO">
 		SELECT
-			UID, NAME, PWD, EMAIL, GRADE, REG_DT
+			UID
+			, NAME
+			, PWD
+			, EMAIL
+			, GRADE
+			, REG_DT
 		FROM
 			TBL_USER
 	</select>
