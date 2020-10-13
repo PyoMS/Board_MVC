@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	@Inject
 	private UserDAO userDAO;
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+//	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Override
 	public UserVO getUserInfo(String uid) throws Exception {

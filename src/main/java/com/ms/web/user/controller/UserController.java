@@ -19,6 +19,14 @@ import com.ms.web.user.service.UserService;
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class); 
 	
+	@RequestMapping(value = "/userList", method = RequestMethod.GET) 
+	public String userList(Model model) throws Exception{ 
+		System.out.println("@userList");
+//		model.addAttribute("userList", userService.getUserList());
+		model.addAttribute("userVO", new UserVO());
+		return "user/user"; 
+	}
+	
 	@Inject 
 	private UserService userService;
 	
