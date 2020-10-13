@@ -12,7 +12,7 @@ import com.ms.web.user.model.UserVO;
 @RequestMapping(value = "/login")
 public class LoginController {
 	
-	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(Model model) throws Exception{
 		model.addAttribute("userVO", new UserVO());
 		return "login/login";
