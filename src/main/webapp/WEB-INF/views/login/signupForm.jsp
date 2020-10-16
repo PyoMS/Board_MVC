@@ -10,6 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script> 
 
+	var dupButton = 0;
+
 	//아이디 중복 추가할 것.
 	$(document).on('click', '#idDupBtn', function(e){
 		e.preventDefault();
@@ -29,10 +31,12 @@
 						success : function(data, status, xhr){
 							if (data.result=="1"){
 								console.log(1);
+								dupButton = 1;
 								alert('사용할 수 있는 아이디 입니다.');
 							}
 							else { // result == 0
 								console.log(0);
+								dupButton = 0;
 								alert('사용할 수 없는 아이디 입니다.');
 								$("#uid").val('');
 								
@@ -54,18 +58,35 @@
 	
 	$(document).on('click', '#btnSignup', function(e){ 
 		e.preventDefault(); 
+		console.log('dupButton : ' + dupButton);
 		if($('#pwd1').val() != $('#pwd2').val()){
 			alert('비밀번호가 일치하지 않습니다.');
 		}
-		else if($('#uid').val()!='' && $('#name').val()!='' && $('#pwd1').val()!='' 
-				&& $('#pwd2').val()!='' && $('#email').val()!=''){
-			$("#form").submit(); 
+		else if($('#uid').val()=='' || $('#name').val()=='' || $('#pwd1').val()=='' 
+			|| $('#pwd2').val()=='' || $('#email').val()==''){
+			alert('필수 입력 사항을 입력해주세요.');
+			
+		}
+		else if(!_typeOfEmail($('#email').val())){
+			alert('이메일 타입이 아닙니다.');
+			console.log(dupButton);
+		}
+		else if(dupButton==0){
+			alert('아이디 중복 확인이 필요합니다.');
 		}
 		else{
-			alert('필수 입력 사항을 입력해주세요.');
+			$("#form").submit(); 
 		}
 		
 	}); 
+	function _typeOfEmail(data){
+		if(data.includes('@')){
+			if(data.includes(".com") || data.includes(".co.kr") || data.includes(".dd")){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	$(document).on('click', '#btnCancel', function(e){ 
@@ -120,7 +141,7 @@
 								<div class="input-group-prepend"> 
 									<span class="input-group-text">@</span> 
 								</div> 
-								<form:input path="email" id="email" class="form-control" placeholder="이메일을 입력해 주세요" /> 
+								<form:input type="email" path="email" id="email" class="form-control" placeholder="이메일을 입력해 주세요" /> 
 							</div> 
 						</div> 
 					</form:form> 
