@@ -67,7 +67,7 @@
 			alert('필수 입력 사항을 입력해주세요.');
 			
 		}
-		else if(!_typeOfEmail($('#email').val())){
+		else if(!isEmail($('#email').val())){
 			alert('이메일 타입이 아닙니다.');
 			console.log(dupButton);
 		}
@@ -79,13 +79,12 @@
 		}
 		
 	}); 
-	function _typeOfEmail(data){
-		if(data.includes('@')){
-			if(data.includes(".com") || data.includes(".co.kr") || data.includes(".dd")){
-				return true;
-			}
-		}
-		return false;
+	function isEmail(asValue) {
+
+		var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+		return regExp.test(asValue); // 형식에 맞는 경우 true 리턴	
+
 	}
 	
 	
