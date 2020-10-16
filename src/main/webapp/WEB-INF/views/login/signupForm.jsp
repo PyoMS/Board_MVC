@@ -11,8 +11,45 @@
 <script> 
 
 	//아이디 중복 추가할 것.
-// 	$(document).on('click', '#btnSignup', function(e){
-// 	});
+	$(document).on('click', '#idDupBtn', function(e){
+		e.preventDefault();
+		var paramData = { 
+			"uid" : $("#uid").val()
+			};
+		//console.log('paramData.uid : ' + paramData.uid.toString().length);
+		if(paramData.uid.toString().length > 0){
+			$.ajax(
+					{ 
+		 				url : "test.do" ,
+						type : "POST" , 
+						//dataType : "json" , //controller -> jsp
+						dataType : "json",
+						//data    : JSON.stringify(paramData),
+						data : paramData , 
+						success : function(data, status, xhr){
+							if (data.result=="1"){
+								console.log(1);
+								alert('사용할 수 있는 아이디 입니다.');
+							}
+							else { // result == 0
+								console.log(0);
+								alert('사용할 수 없는 아이디 입니다.');
+								$("#uid").val('');
+								
+							} 
+						},
+						error: function (request, status, error){
+				   			console.log('error!');
+							console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					    }
+					}
+				);
+		}
+		else{
+			alert('아이디를 입력해 주세요.');
+		}
+		
+	});
 	
 	
 	$(document).on('click', '#btnSignup', function(e){ 
@@ -23,8 +60,7 @@
 		else{
 			alert('비밀번호가 일치하지 않습니다.');
 		}
-		}
-	); 
+	}); 
 	
 	$(document).on('click', '#btnCancel', function(e){ 
 		e.preventDefault(); 
@@ -50,7 +86,8 @@
 						<div class="form-group row"> 
 							<label for="uid" class="col-md-3 col-form-label text-md-right">아이디</label> 
 							<div class="col-md-5"> 
-							<form:input path="uid" id="uid" class="form-control" placeholder="아이디을 입력해 주세요" /> 
+								<form:input path="uid" id="uid" class="form-control" placeholder="아이디을 입력해 주세요" />
+								<form:button type="button" class="btn btn-sm btn-primary" id="idDupBtn">확인</form:button> 
 							</div> 
 						</div> 
 						<div class="form-group row"> 

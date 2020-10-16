@@ -39,4 +39,5 @@ public class UserDAOImpl implements UserDAO{
 		return sqlSession.delete("com.ms.web.user.userMapper.deleteUser", uid);
 	}
 
+
 }
