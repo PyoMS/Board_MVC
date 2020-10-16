@@ -80,12 +80,12 @@
 	<article> 
 		<div class="container col-md-6" role="main"> 
 			<div class="card"> 
-				<div class="card-header">Register</div> 
+				<div class="card-header">Sing Up</div> 
 				<div class="card-body"> 
 					<form:form name="form" id="form" class="form-signup" role="form" modelAttribute="userVO" method="post" action="${pageContext.request.contextPath}/user/insertUser"> 
 						<div class="form-group row"> 
 							<label for="uid" class="col-md-3 col-form-label text-md-right">아이디</label> 
-							<div class="col-md-5"> 
+							<div class="input-group col-md-7"> 
 								<form:input path="uid" id="uid" class="form-control" placeholder="아이디을 입력해 주세요" />
 								<form:button type="button" class="btn btn-sm btn-primary" id="idDupBtn">확인</form:button> 
 							</div> 
