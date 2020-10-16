@@ -54,13 +54,19 @@
 	
 	$(document).on('click', '#btnSignup', function(e){ 
 		e.preventDefault(); 
-		if($('#pwd1') == $('#pwd2')){
+		if($('#pwd1').val() != $('#pwd2').val()){
+			alert('비밀번호가 일치하지 않습니다.');
+		}
+		else if($('#uid').val()!='' && $('#name').val()!='' && $('#pwd1').val()!='' 
+				&& $('#pwd2').val()!='' && $('#email').val()!=''){
 			$("#form").submit(); 
 		}
 		else{
-			alert('비밀번호가 일치하지 않습니다.');
+			alert('필수 입력 사항을 입력해주세요.');
 		}
+		
 	}); 
+	
 	
 	$(document).on('click', '#btnCancel', function(e){ 
 		e.preventDefault(); 
@@ -99,13 +105,13 @@
 						<div class="form-group row"> 
 							<label for="pwd" class="col-md-3 col-form-label text-md-right">비밀번호</label> 
 							<div class="col-md-5"> 
-								<form:password path="pwd" id="pwd" class="form-control" placeholder="비밀번호를 입력해 주세요" /> 
+								<form:password path="pwd" id="pwd1" class="form-control" placeholder="비밀번호를 입력해 주세요" /> 
 							</div> 
 						</div> 
 						<div class="form-group row"> 
 							<label for="re_pwd" class="col-md-3 col-form-label text-md-right">비밀번호 확인</label> 
 							<div class="col-md-5"> 
-								<form:password path="re_pwd" id="re_pwd" class="form-control" placeholder="비밀번호를 입력해 주세요" /> 
+								<form:password path="re_pwd" id="pwd2" class="form-control" placeholder="비밀번호를 입력해 주세요" /> 
 							</div> 
 						</div> 
 						<div class="form-group row"> 
