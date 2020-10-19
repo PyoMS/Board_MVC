@@ -7,13 +7,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title></title>
 	<script>
 		alert("아이디 혹은 비밀번호가 틀렸습니다.");
 		location.href = "${pageContext.request.contextPath}/login/login"; 
 	</script>
 </head>
-<body>
-
-</body>
 </html>

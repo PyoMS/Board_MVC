@@ -73,7 +73,6 @@ public class BoardController {
 			@RequestParam(required = false, defaultValue = "title") String searchType,
 			@RequestParam(required = false) String keyword) throws Exception {
 		System.out.println("@getLoginBoardList");
-		System.out.println(userVO.toString());
 		try {
 			UserVO data = userService.getUserInfo(userVO.getUid());
 			if(data.equals(null)||data == null){
