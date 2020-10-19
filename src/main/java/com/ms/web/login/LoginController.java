@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ms.web.user.dao.UserDAO;
@@ -37,14 +38,14 @@ public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping(value = "test.do", method = RequestMethod.POST)
-	public void duplicateID(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println("duplicateID : "+request.getParameter("uid"));
+	public void duplicateID(Model model, @RequestParam("userVO") UserVO userVO  ,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println("duplicateID : "+ userVO.getUid());
 		
 		JSONObject resultdata = new JSONObject();
 		
 		try {
 			System.out.println("Test : " + UserDao.getUserInfo(request.getParameter("uid")).getUid());
-			if(UserDao.getUserInfo(request.getParameter("uid")).getUid()!=null || UserDao.getUserInfo(request.getParameter("uid")).getUid()!=""){
+			if(UserDao.getUserInfo(userVO.getUid()).getUid()!=null || UserDao.getUserInfo(userVO.getUid()).getUid()!=""){
 				resultdata.put("result", "0");
 			}
 				
