@@ -10,13 +10,42 @@
 			function fn_btnSignupClick(){ 
 				location.href ="${pageContext.request.contextPath}/login/signupForm"; 
 			} 
+			
+// 			$.ajax({
+// 				url : "test.do" ,
+// 				type : "POST" , 
+// 				//dataType : "json" , //controller -> jsp
+// 				dataType : "json",
+// 				//data    : JSON.stringify(paramData),
+// 				data : paramData , 
+// 				success : function(data, status, xhr){
+// 					if (data.result=="1"){
+// 						console.log(1);
+// 						dupButton = 1;
+// 						alert('사용할 수 있는 아이디 입니다.');
+// 					}
+// 					else { // result == 0
+// 						console.log(0);
+// 						dupButton = 0;
+// 						alert('사용할 수 없는 아이디 입니다.');
+// 						$("#uid").val('');
+						
+// 					} 
+// 				},
+// 				error: function (request, status, error){
+// 		   			console.log('error!');
+// 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 			    }
+				
+// 			});
+				
 		</script>
 	</head>
 	
 	<body>
 		<!-- login form {s} --> 
 		<form:form class="form-signin" name="form" id="form" role="form" modelAttribute="userVO" 
-		method="post" action="${pageContext.request.contextPath}/board/saveBoard"> 
+		method="POST" action="${pageContext.request.contextPath}/board/getLoginBoardList"> 
 			<div class="text-center mb-4"> 
 				<h1 class="h3 mb-3 font-weight-normal">PMS.COM</h1> 
 			</div> 

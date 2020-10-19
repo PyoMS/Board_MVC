@@ -24,6 +24,8 @@ import com.ms.web.board.model.BoardVO;
 import com.ms.web.board.model.ReplyVO;
 import com.ms.web.board.service.BoardService;
 import com.ms.web.common.Search;
+import com.ms.web.user.model.UserVO;
+import com.ms.web.user.service.UserService;
 
 import org.json.simple.JSONObject;
 
@@ -36,6 +38,9 @@ public class BoardController {
 	
 	@Inject
 	private BoardService boardService;
+	
+	@Inject
+	private UserService userService;
 	
 	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
 	public String getBoardList(Model model, 
@@ -59,6 +64,51 @@ public class BoardController {
 		model.addAttribute("pagination", search);
 		model.addAttribute("boardList", boardService.getBoardList(search));
 		return "board/index"; // return 되는 화면의 주소값. (단순 String x)
+	}
+	
+	@RequestMapping(value = "/getLoginBoardList", method = RequestMethod.POST)
+	public String getLoginBoardList(Model model, @ModelAttribute("userVO") UserVO userVO,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "title") String searchType,
+			@RequestParam(required = false) String keyword) throws Exception {
+		System.out.println("@getLoginBoardList");
+		System.out.println(userVO.toString());
+		
+		try {
+			UserVO data = userService.getUserInfo(userVO.getUid());
+			if(data.equals(null)||data == null){
+				System.out.println("아이디를 확인해 주십시오.");
+				return "redirect:/login/login";
+			}else if(!data.getPwd().equals(userVO.getPwd())){
+				System.out.println("비밀번호를 확인해 주십시오.");
+				System.out.println("userVO.getPwd() : "+userVO.getPwd());
+				System.out.println("data.getPwd() : "+data.getPwd());
+				return "redirect:/login/login";
+			}
+		} catch (NullPointerException e) {
+			System.out.println("아이디를 확인해 주십시오.");
+			return "redirect:/login/login";
+		} catch (Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+		
+		Search search = new Search();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
+		
+		// 전체 게시글 개수
+		int listCnt = boardService.getBoardListCnt(search);
+		// Pagination 객체생성
+//		Pagination pagination = new Pagination();
+//		pagination.pageInfo(page, range, listCnt);
+		search.pageInfo(page, range, listCnt);
+		
+		model.addAttribute("pagination", search);
+		model.addAttribute("boardList", boardService.getBoardList(search));
+		return "board/index"; // return 되는 화면의 주소값. (단순 String x)
+		
 	}
 	
 	@RequestMapping("/boardForm")
