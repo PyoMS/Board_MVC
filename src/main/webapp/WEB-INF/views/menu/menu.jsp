@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ include file="/WEB-INF/views/layout/header.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/layout/header.jsp" %> --%>
 
 <c:url var="saveURL" value="/menu/saveMenu"></c:url>
 <c:url var="deleteURL" value="/menu/deleteMenu"></c:url>

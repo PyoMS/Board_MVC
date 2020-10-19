@@ -4,7 +4,8 @@
 
 <tiles-definitions> 
 	<!-- login --> 
-	<definition name="login-layout" template="/WEB-INF/tiles/layouts/login_layout.jsp"> </definition> 
+	<definition name="login-layout" template="/WEB-INF/tiles/layouts/login_layout.jsp">
+	</definition> 
 	
 	<definition name="login/*" extends="login-layout"> 
 		<put-attribute name="tile_body" value="/WEB-INF/views/login/{1}.jsp" /> 
@@ -17,6 +18,18 @@
 	
 	<definition name="board/*" extends="base-layout"> 
 		<put-attribute name="tile_body" value="/WEB-INF/views/board/{1}.jsp" /> 
+	</definition> 
+	
+	<definition name="menu/*" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/menu/{1}.jsp" /> 
+	</definition> 
+	
+<!-- 	<definition name="login/*" extends="base-layout">  -->
+<!-- 		<put-attribute name="tile_body" value="/WEB-INF/views/login/{1}.jsp" />  -->
+<!-- 	</definition>  -->
+	
+	<definition name="user/*" extends="base-layout"> 
+		<put-attribute name="tile_body" value="/WEB-INF/views/user/{1}.jsp" /> 
 	</definition> 
 </tiles-definitions>
 
