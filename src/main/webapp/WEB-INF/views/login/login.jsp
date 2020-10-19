@@ -66,15 +66,8 @@
 				<label for="pwd" class="sr-only">User Password</label> 
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button> 
-<!-- 			<button class="btn btn-lg btn-primary btn-block" type="submit" onClick="fn_Login($('#uid').val(), $('#pwd').val())">Log In</button>  -->
 			<p class="mt-5 mb-3 text-muted text-center">© 2020. PMS. All rights reserved.</p> 
 		</form:form>
-		
-<!-- 		<div> -->
-<%-- 			<c:when test="${!empty msgAlert}"> --%>
-<!-- 				<script>alert(msgAlert)</script> -->
-<%-- 			</c:when> --%>
-<!-- 		</div> -->
 		
 		
 		<!-- login form {e} -->
