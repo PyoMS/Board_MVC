@@ -11,41 +11,49 @@
 				location.href ="${pageContext.request.contextPath}/login/signupForm"; 
 			} 
 			
-// 			$.ajax({
-// 				url : "test.do" ,
-// 				type : "POST" , 
-// 				//dataType : "json" , //controller -> jsp
-// 				dataType : "json",
-// 				//data    : JSON.stringify(paramData),
-// 				data : paramData , 
-// 				success : function(data, status, xhr){
-// 					if (data.result=="1"){
-// 						console.log(1);
-// 						dupButton = 1;
-// 						alert('사용할 수 있는 아이디 입니다.');
-// 					}
-// 					else { // result == 0
-// 						console.log(0);
-// 						dupButton = 0;
-// 						alert('사용할 수 없는 아이디 입니다.');
-// 						$("#uid").val('');
-						
-// 					} 
-// 				},
-// 				error: function (request, status, error){
-// 		   			console.log('error!');
-// 					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-// 			    }
-				
-// 			});
+			function fn_Login(uid, pwd){
+				console.log(uid); console.log(pwd);
+				var paramData ={
+						"uid" : uid,
+						"pwd" : pwd
+				}
+				$.ajax({
+					url : "${pageContext.request.contextPath}/board/getLoginBoardList" ,
+					type : "POST", 
+					//dataType : "json" , //controller -> jsp
+					dataType : "json",
+					//data    : JSON.stringify(paramData),
+					data : paramData , 
+					success : function(result){
+						console.log('success');
+						alert(result.alert);
+// 						if (data.result=="1"){
+// 							console.log(1);
+// 							dupButton = 1;
+// 							alert('사용할 수 있는 아이디 입니다.');
+// 						}
+// 						else { // result == 0
+// 							console.log(0);
+// 							dupButton = 0;
+// 							alert('사용할 수 없는 아이디 입니다.');
+// 							$("#uid").val('');
+// 						} 
+					},
+					error: function (request, status, error){
+			   			console.log('error!');
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				    }
+				});
+			}
+			
 				
 		</script>
 	</head>
 	
 	<body>
 		<!-- login form {s} --> 
-		<form:form class="form-signin" name="form" id="form" role="form" modelAttribute="userVO" 
-		method="POST" action="${pageContext.request.contextPath}/board/getLoginBoardList"> 
+		<form:form class="form-signin" name="form" id="form" role="form" modelAttribute="userVO"
+ 		method="POST" action="${pageContext.request.contextPath}/board/getLoginBoardList">
 			<div class="text-center mb-4"> 
 				<h1 class="h3 mb-3 font-weight-normal">PMS.COM</h1> 
 			</div> 
@@ -56,10 +64,18 @@
 			<div class="form-label-group"> 
 				<form:password path="pwd" id="pwd" class="form-control" placeholder="User Password" required="" /> 
 				<label for="pwd" class="sr-only">User Password</label> 
-			</div> 
+			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button> 
+<!-- 			<button class="btn btn-lg btn-primary btn-block" type="submit" onClick="fn_Login($('#uid').val(), $('#pwd').val())">Log In</button>  -->
 			<p class="mt-5 mb-3 text-muted text-center">© 2020. PMS. All rights reserved.</p> 
-		</form:form> 
+		</form:form>
+		
+<!-- 		<div> -->
+<%-- 			<c:when test="${!empty msgAlert}"> --%>
+<!-- 				<script>alert(msgAlert)</script> -->
+<%-- 			</c:when> --%>
+<!-- 		</div> -->
+		
 		
 		<!-- login form {e} -->
 		<span style="font-size:11pt;"> 

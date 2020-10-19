@@ -74,21 +74,23 @@ public class BoardController {
 			@RequestParam(required = false) String keyword) throws Exception {
 		System.out.println("@getLoginBoardList");
 		System.out.println(userVO.toString());
-		
 		try {
 			UserVO data = userService.getUserInfo(userVO.getUid());
 			if(data.equals(null)||data == null){
-				System.out.println("아이디를 확인해 주십시오.");
-				return "redirect:/login/login";
-			}else if(!data.getPwd().equals(userVO.getPwd())){
-				System.out.println("비밀번호를 확인해 주십시오.");
-				System.out.println("userVO.getPwd() : "+userVO.getPwd());
-				System.out.println("data.getPwd() : "+data.getPwd());
-				return "redirect:/login/login";
+				String str = "아이디를 확인해 주십시오.";
+				System.out.println(str);
+				return "redirect:/login/failLogin";
+			}
+			
+			else if(!data.getPwd().equals(userVO.getPwd())){
+				String str = "비밀번호를 확인해 주십시오.";
+				System.out.println(str);
+				return "redirect:/login/failLogin";
 			}
 		} catch (NullPointerException e) {
-			System.out.println("아이디를 확인해 주십시오.");
-			return "redirect:/login/login";
+			String str = "아이디를 확인해 주십시오.";
+			System.out.println(str);
+			return "redirect:/login/failLogin";
 		} catch (Exception e){
 			e.printStackTrace();
 			throw e;
