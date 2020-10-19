@@ -62,5 +62,10 @@ public class LoginController {
 		response.getWriter().print(resultdata);
 				
 	}
+	@RequestMapping(value = "/failLogin", method = RequestMethod.GET)
+	public String loginFail(Model model) throws Exception{
+		model.addAttribute("userVO", new UserVO());
+		return "login/failLogin";
+	}
 
 }
