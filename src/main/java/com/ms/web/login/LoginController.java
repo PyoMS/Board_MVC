@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ms.web.user.dao.UserDAO;
 import com.ms.web.user.model.UserVO;
+import com.ms.web.user.service.UserService;
 
 
 @Controller
@@ -21,8 +22,7 @@ import com.ms.web.user.model.UserVO;
 public class LoginController {
 	
 	@Inject
-	private UserDAO UserDao;
-	
+	private UserService userService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(Model model) throws Exception{
@@ -44,8 +44,9 @@ public class LoginController {
 		JSONObject resultdata = new JSONObject();
 		
 		try {
-			System.out.println("Test : " + UserDao.getUserInfo(request.getParameter("uid")).getUid());
-			if(UserDao.getUserInfo(userVO.getUid()).getUid()!=null || UserDao.getUserInfo(userVO.getUid()).getUid()!=""){
+			UserVO userVO_service = userService.getUserInfo(request.getParameter("uid"));
+			System.out.println("Test : " + userService.getUserInfo(request.getParameter("uid")));
+			if(userVO_service.getUid()!=null || userVO_service.getUid()!=""){
 				resultdata.put("result", "0");
 			}
 				
