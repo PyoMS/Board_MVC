@@ -15,6 +15,7 @@
 	//아이디 중복 추가할 것.
 	$(document).on('click', '#idDupBtn', function(e){
 		e.preventDefault();
+		console.log('idDupBtn');
 		var paramData = { 
 			"uid" : $("#uid").val()
 			};
@@ -22,7 +23,7 @@
 		if(paramData.uid.toString().length > 0){
 			$.ajax(
 					{ 
-		 				url : "test.do" ,
+		 				url : "${pageContext.request.contextPath}/login/test.do" ,
 						type : "POST" , 
 						//dataType : "json" , //controller -> jsp
 						dataType : "json",

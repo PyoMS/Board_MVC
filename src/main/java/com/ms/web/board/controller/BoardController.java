@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ms.encrypt.Encrypt;
 import com.ms.web.board.model.BoardVO;
 import com.ms.web.board.model.ReplyVO;
 import com.ms.web.board.service.BoardService;
@@ -72,6 +73,7 @@ public class BoardController {
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "title") String searchType,
 			@RequestParam(required = false) String keyword) throws Exception {
+		Encrypt enc = new Encrypt();
 		System.out.println("@getLoginBoardList");
 		try {
 			UserVO data = userService.getUserInfo(userVO.getUid());
@@ -81,7 +83,7 @@ public class BoardController {
 				return "redirect:/login/failLogin";
 			}
 			
-			else if(!data.getPwd().equals(userVO.getPwd())){
+			else if(!enc.decAES(data.getPwd()).equals(userVO.getPwd())){
 				String str = "비밀번호를 확인해 주십시오.";
 				System.out.println(str);
 				return "redirect:/login/failLogin";

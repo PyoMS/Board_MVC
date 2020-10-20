@@ -36,11 +36,11 @@ public class LoginController {
 		return "login/signupForm"; 
 	}
 	
+	//ajax 이므로 HttpServlet으로 정보값을 대체한다. 
 	@ResponseBody
 	@RequestMapping(value = "test.do", method = RequestMethod.POST)
-	public void duplicateID(Model model, @RequestParam("userVO") UserVO userVO  ,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println("duplicateID : "+ userVO.getUid());
-		
+	public void duplicateID(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println("duplicateID : "+ request.getParameter("uid"));
 		JSONObject resultdata = new JSONObject();
 		
 		try {
@@ -52,6 +52,7 @@ public class LoginController {
 				
 		} 
 		catch (NullPointerException e) { // null 값이 나온다 => 기존 데이터가 존재 하지 않는다.
+			e.printStackTrace();
 			resultdata.put("result", "1");
 		} 
 		catch(Exception e ){
