@@ -212,6 +212,18 @@
 			function unescapeHTML(escapedHTML) {
 				return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
 			}
+			
+			//Enter key function
+			function enterkey() {
+				alert('press enterKey');
+				document.getElementById("btnReplySave").onclick;
+// 		        if (window.event.keyCode == 13) {
+// 		        	console.log('press enterKey');
+// 		        	alert('press enterKey');
+// 		        	//버튼클릭.
+// 		        }
+			}
+			
 			/* 
 			var data = {'<c:out value="${boardContent.content}"/>'};
 			var htmls = unescapeHTML(data);
@@ -234,6 +246,7 @@
 			test = test.replace(/(\n|\r\n|\n\r)/g,'');
 // 			test = test.replace(/(<br>|<br\/>|<br \/>)/g, '');
 			console.log('test : ' + test);
+			
 			
 		</script>
 	</head>
@@ -262,17 +275,16 @@
 				<div style="margin-top : 20px">
 					<button type="button" class="btn btn-sm btn-primary" id="btnUpdate">수정</button>
 					<button type="button" class="btn btn-sm btn-primary" id="btnDelete">삭제</button>
-					<button type="button" class="btn btn-sm btn-primary" id="btnList" onClick=btnList();>목록</button>
+					<button type="button" class="btn btn-sm btn-primary" id="btnList" onClick="btnList()">목록</button>
 				</div>
 				<!-- Reply Form {s} -->
 				<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
-					<form:form name="form" id="form" role="form" modelAttribute="replyVO" method="post">
+					<form:form name="form" id="form" role="form" modelAttribute="replyVO" method="post" onkeypress="if( event.keyCode == 13 ){}">
 					<form:hidden path="bid" id="bid"/>
 					<div class="row">
 						<div class="col-sm-10">
 							<form:textarea path="content" type="text" id="content" class="form-control" rows="3" placeholder="댓글을 입력해 주세요"></form:textarea>
 						</div>
-						
 						<div class="col-sm-2">
 							<form:input path="reg_id" type="text" class="form-control" id="reg_id" placeholder="댓글 작성자"></form:input>
 							<button type="button" class="btn btn-sm btn-primary" id="btnReplySave" style="width: 100%; margin-top: 10px"> 저 장 </button>

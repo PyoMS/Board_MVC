@@ -10,43 +10,6 @@
 			function fn_btnSignupClick(){ 
 				location.href ="${pageContext.request.contextPath}/login/signupForm"; 
 			} 
-			
-			function fn_Login(uid, pwd){
-				console.log(uid); console.log(pwd);
-				var paramData ={
-						"uid" : uid,
-						"pwd" : pwd
-				}
-				$.ajax({
-					url : "${pageContext.request.contextPath}/board/getLoginBoardList" ,
-					type : "POST", 
-					//dataType : "json" , //controller -> jsp
-					dataType : "json",
-					//data    : JSON.stringify(paramData),
-					data : paramData , 
-					success : function(result){
-						console.log('success');
-						alert(result.alert);
-// 						if (data.result=="1"){
-// 							console.log(1);
-// 							dupButton = 1;
-// 							alert('사용할 수 있는 아이디 입니다.');
-// 						}
-// 						else { // result == 0
-// 							console.log(0);
-// 							dupButton = 0;
-// 							alert('사용할 수 없는 아이디 입니다.');
-// 							$("#uid").val('');
-// 						} 
-					},
-					error: function (request, status, error){
-			   			console.log('error!');
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				    }
-				});
-			}
-			
-				
 		</script>
 	</head>
 	

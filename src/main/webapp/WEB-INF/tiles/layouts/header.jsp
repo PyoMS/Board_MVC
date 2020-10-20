@@ -68,10 +68,13 @@
 		<div class="collapse navbar-collapse" id="navbarsExample03"> 
 			<ul class="navbar-nav mr-auto"> 
 				<li class="nav-item"> 
-					<a class="nav-link" href="#">Board</a> 
+					<a class="nav-link" href="${pageContext.request.contextPath}/board/getBoardList">Main</a> 
 				</li> 
 				<li class="nav-item"> 
-					<a class="nav-link" href="#">Q&A</a> 
+					<a class="nav-link" href="${pageContext.request.contextPath}/menu/getMenu">Menu</a> 
+				</li> 
+				<li class="nav-item"> 
+					<a class="nav-link" href="${pageContext.request.contextPath}/login/login">Logout</a> 
 				</li> 
 			</ul> 
 			<form class="form-inline my-2 my-md-0"> 
