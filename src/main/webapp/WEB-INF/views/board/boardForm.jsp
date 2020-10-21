@@ -12,7 +12,17 @@
 		
 		<title>Insert title here</title>
 		<script src="${pageContext.request.contextPath}/resources/common/ckeditor/ckeditor.js"></script>
-		
+		<%
+			String strRegerer = request.getHeader("referer");
+			if(strRegerer==null){
+		%>
+			<script>
+				alert("정상적인 경로로 접근해주세요.");
+				document.location.href ="${pageContext.request.contextPath}/login/login";
+			</script>
+		<%
+		}
+		%>
 		<script>
 		$(document).on('click', '#btnSave', function(e){
 			e.preventDefault();
@@ -109,7 +119,7 @@
 				</form:form>
 				<div >
 					<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button>
-					<button type="button" class="btn btn-sm btn-primary" id="btnList" onClick=btnList();>목록</button>
+					<button type="button" class="btn btn-sm btn-primary" id="btnList" onClick="btnList()">목록</button>
 				</div>
 			</div>
 		</article>

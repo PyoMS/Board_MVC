@@ -10,6 +10,7 @@
 			function fn_btnSignupClick(){ 
 				location.href ="${pageContext.request.contextPath}/login/signupForm"; 
 			} 
+			
 		</script>
 	</head>
 	
