@@ -14,9 +14,10 @@ public class NotFoundException extends RuntimeException {
 	private static final Logger logger = LoggerFactory.getLogger(NotFoundException.class);
 	
 	@ExceptionHandler(RuntimeException.class)
-	public String notFoundException(Model model, Exception e) {
+	public String NotFoundException(Model model, Exception e) {
 		logger.info("@notFoundException ¹æ½Ä \n###exeption : " + e.getMessage());
 		model.addAttribute("exception", e);
 		return "error/404error";
 	}
 }
+
