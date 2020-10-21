@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ms.encrypt.Encrypt;
@@ -164,9 +165,10 @@ public class BoardController {
 		return "redirect:/board/getBoardList";
 	}
 
-	// @ResponseBody
-	@ExceptionHandler({ SQLException.class, DataAccessException.class })
-	public String exceptionHandler(Model model, Exception e) {
+	@ExceptionHandler(RuntimeException.class)
+	public @ResponseBody String exceptionHandler(Model model, Exception e) {
+		System.out.println("@@@exceptionHandler");
+		System.out.println("e : " + e.getMessage());
 		logger.info("exception : " + e.getMessage());
 		model.addAttribute("exception", e);
 		return "error/exception";
@@ -295,5 +297,6 @@ public class BoardController {
 			e.printStackTrace();
 		}
 	}
+	
 
 }
