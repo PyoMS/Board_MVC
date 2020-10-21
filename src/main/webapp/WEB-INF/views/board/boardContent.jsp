@@ -12,6 +12,17 @@
 		<title>board</title>
 		<c:url var="updateReplyURL" value="/board/updateReply"></c:url>
 		<script src="${pageContext.request.contextPath}/resources/common/ckeditor/ckeditor.js"></script>
+		<%
+			String strRegerer = request.getHeader("referer");
+			if(strRegerer==null){
+		%>
+			<script>
+				alert("정상적인 경로로 접근해주세요.");
+				document.location.href ="${pageContext.request.contextPath}/board/getBoardList";
+			</script>
+		<%
+		}
+		%>
 		<script>
 			$(document).ready(function(){
 				showReplyList();

@@ -22,6 +22,17 @@
 	</style>
 	 -->
 	 <c:url var="getBoardListURL" value="/board/getBoardList"></c:url>
+	 	<%
+			String strRegerer = request.getHeader("referer");
+			if(strRegerer==null){
+		%>
+			<script>
+				alert("정상적인 경로로 접근해주세요.");
+				document.location.href ="${pageContext.request.contextPath}/login/login";
+			</script>
+		<%
+		}
+		%>
 	<script>
 		var data = [];
 		$(document).on('click', '#btnWriteForm', function(e){
