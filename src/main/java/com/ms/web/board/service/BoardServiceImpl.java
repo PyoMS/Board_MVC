@@ -29,14 +29,14 @@ public class BoardServiceImpl implements BoardService{
 	public void insertBoard(BoardVO boardVO) throws Exception {
 		boardDAO.insertBoard(boardVO);
 	}
-	/*
+	
 	@Override	//원본
 	public BoardVO getBoardContent(int bid) throws Exception {
 		boardDAO.updateViewCnt(bid); //조회수 ++
 		return boardDAO.getBoardContent(bid);
 	}
-	*/
 	
+	/*		// error 테스트
 	@Transactional
 	@Override
 	public BoardVO getBoardContent(int bid) throws Exception{
@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService{
 	//	boardVO = boardDAO.getBoardContent(bid);
 		try {
 			boardVO.setBid(bid);
-			boardVO.setCate_cd("1111111111111111111111111111111111111");
+			boardVO.setCate_cd("11111111111111");
 			boardDAO.updateViewCnt(bid); // setCate_cd에서 예외처리되어야 하므로 바껴야함.
 			boardDAO.updateBoard(boardVO);
 		} catch (RuntimeException e) {
@@ -56,6 +56,7 @@ public class BoardServiceImpl implements BoardService{
 		}
 		return boardVO;
 	}
+	*/
 	
 	@Override
 	public void updateBoard(BoardVO boardVO) throws Exception {
