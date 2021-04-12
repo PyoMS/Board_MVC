@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ms</groupId>
 	<artifactId>web</artifactId>
-	<name>Board_Psycological</name>
+	<name>Board_MVC</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -12,6 +12,7 @@
 		<org.springframework-version>3.2.18.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<maven-jar-plugin.version>3.1.2</maven-jar-plugin.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
